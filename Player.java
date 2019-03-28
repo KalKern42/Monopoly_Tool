@@ -22,7 +22,7 @@ public class Player {
 	public Property getProperty(String name) {
 		String caseInsensitive = name.toLowerCase();
 		for (Property property : properties) {
-			if (property.name.toLowerCase().equals(caseInsensitive)) {
+			if (property.name.equalsIgnoreCase(caseInsensitive)) {
 				return property;
 			}
 		}

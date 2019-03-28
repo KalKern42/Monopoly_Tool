@@ -13,8 +13,7 @@ class Main {
 		med.houses = 4;
 		p1.giveProperty(med);
 		
-		System.out.print(p1.getProperty("mediterranean avenue").rentPrice());
-		
+		System.out.print(properties.getByColor("purple"));
 	}
 }
 
