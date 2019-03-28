@@ -62,7 +62,7 @@ class Property {
 	} 
 	
 	public String toString() {
-		return name;
+		return name.toLowerCase();
 	}
 }
 

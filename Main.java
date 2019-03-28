@@ -13,7 +13,7 @@ class Main {
 		med.houses = 4;
 		p1.giveProperty(med);
 		
-		System.out.print(properties.getByColor("purple"));
+		System.out.print(properties.getByColor("railroad"));
 	}
 }
 
