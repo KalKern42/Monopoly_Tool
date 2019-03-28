@@ -20,6 +20,8 @@ class Property {
 		name = n;
 	}
 	
+	
+	
 	public int worth() {
 		int base = mortgage;
 		

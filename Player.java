@@ -14,9 +14,20 @@ public class Player {
 		return net;
 	}
 	
-	public void addProperty(Property newProperty) {
+	public void giveProperty(Property newProperty) {
 		newProperty.owner = name;
 		properties.add(newProperty);
+	}
+	
+	public Property getProperty(String name) {
+		String caseInsensitive = name.toLowerCase();
+		for (Property property : properties) {
+			if (property.name.toLowerCase().equals(caseInsensitive)) {
+				return property;
+			}
+		}
+		return null;
+
 	}
 	
 	public Player(String n) {

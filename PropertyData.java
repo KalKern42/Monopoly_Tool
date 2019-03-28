@@ -5,7 +5,18 @@ import java.util.ArrayList;
 class PropertyData {
 	public ArrayList<Property> properties = new ArrayList<Property>();
 	
-	// making changes to property data given property name
+	public Property get(String name) {
+		String caseInsensitive = name.toLowerCase();
+		for (Property property : properties) {
+			if (property.name.toLowerCase().equals(name)) {
+				return property;
+			}
+		}
+		return null;
+	}
+	
+	
+	
 	
 	public PropertyData() {
 		Property a = new Property("purple", "mediterranean avenue");
