@@ -8,7 +8,7 @@ the structure needed for commands to operate the
 import java.util.Scanner;
 
 class Commands {
-	public static void main(String[] args) {
+	public static void commandudes(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int stayIn = 0;
 		String usrImpt = "";
@@ -24,7 +24,7 @@ class Commands {
 Adding a new comand looks like:
 elif (usrImpt.contains(command name){
 	everything the command does
-}*/
+}   ~~Reffer to kill as a refference also~~*/
 			if (usrImpt.contains("let me out")) {
 				stayIn = 1;
 			}else if (usrImpt.contains("kill")) {
