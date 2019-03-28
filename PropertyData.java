@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-
-
 class PropertyData {
 	public ArrayList<Property> propertyList = new ArrayList<Property>();
 	
