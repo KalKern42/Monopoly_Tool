@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import javax.swing.text.*;
+
 public class Property {
 	String color = "COLOR MISSSING";
 	String name = "NAME MISSING";
@@ -21,6 +24,18 @@ public class Property {
 		name = n;
 	}
 
+	private ArrayList<Property> findAllOfColor(String color, ArrayList<Property> properties) {
+		ArrayList<Property> returnList = new ArrayList<Property>();
+		
+		for (Property property : properties) {
+			if (property.color == this.color) {
+				returnList.add(property);
+			}
+		}
+		return returnList;
+	}
+
+
 
 	public int worth() {
 		int base = mortgage;
@@ -39,20 +54,31 @@ public class Property {
 		if (hotel) {
 			base += housePrice;
 		}
-		
-		
-		
+			
 		return base;
 	}
 	
 	public int rentPrice() {
+		
+		ArrayList<Property> playerColorMatches = findAllOfColor(this.color, owner.properties);
+		ArrayList<Property> overallColorMatches = findAllOfColor(this.color, Main.properties.propertyList);
+		
 		if (mortgaged || (owner == null)) {
 			return 0;
 		}
+	
+		if (!mortgaged) {
+			if (playerColorMatches.size() == overallColorMatches.size()) {
+				if (!(railroad)) {
+					if (houses != 0) {
+						return houseRent[0] * 2;
+					}
+				}
+			}
+		}
 		
-		if (railroad || utility) {
-			// TODO: find rent based on number of properties owned
-			return 0;
+		if (railroad) {
+			return 25 * (int)Math.pow(2, playerColorMatches.size() - 1);
 		}
 		
 		if (hotel) {
@@ -66,5 +92,6 @@ public class Property {
 	public String toString() {
 		return name.toLowerCase();
 	}
+
 }
 

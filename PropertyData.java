@@ -212,7 +212,7 @@ public class PropertyData {
 		r_r.mortgage = 100;
 		propertyList.add(r_r);
 		
-		Property p_r = new Property("railroad", "pensylvania railroad");
+		Property p_r = new Property("railroad", "pennsylvania railroad");
 		p_r.railroad = true;
 		p_r.price = 200;
 		p_r.mortgage = 100;
@@ -224,7 +224,7 @@ public class PropertyData {
 		b_r.mortgage = 100;
 		propertyList.add(b_r);
 		
-		Property s_r = new Property("railroad", "Short line railroad");
+		Property s_r = new Property("railroad", "Short line");
 		s_r.railroad = true;
 		s_r.price = 200;
 		s_r.mortgage = 100;
