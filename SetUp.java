@@ -5,7 +5,6 @@ public class SetUp {
 	public static void setUp(){
 		Scanner input = new Scanner(System.in);
 		
-		System.out.print("How many players will be enjoying my company? \n");
 		System.out.print("How many players will be enjoying my company?  I will not allow more than 6 or less than 2.  \n");
 		int p = input.nextInt();
 		
