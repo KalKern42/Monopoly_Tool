@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 
 
-class PlayerData {
-	public ArrayList<Player> playerList = new ArrayList<Player>();
+public class PlayerData {
+	public  ArrayList<Player> playerList = new ArrayList<Player>();
 	
 	public Player get(String name) {
 		String caseInsensitive = name.toLowerCase();

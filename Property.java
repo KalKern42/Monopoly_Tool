@@ -1,7 +1,7 @@
-class Property {
+public class Property {
 	String color = "COLOR MISSSING";
 	String name = "NAME MISSING";
-	String owner = null;
+	Player owner = null;
 	boolean railroad = false;
 	boolean utility = false;
 	int price = 0;
@@ -11,6 +11,7 @@ class Property {
 	
 	int houses = 0;
 	boolean hotel = false;
+		
 	
 	int[] houseRent = new int[]{0, 0, 0, 0, 0};
 	int hotelRent = 0;
@@ -19,9 +20,8 @@ class Property {
 		color = c;
 		name = n;
 	}
-	
-	
-	
+
+
 	public int worth() {
 		int base = mortgage;
 		
@@ -39,6 +39,8 @@ class Property {
 		if (hotel) {
 			base += housePrice;
 		}
+		
+		
 		
 		return base;
 	}

@@ -15,7 +15,7 @@ public class Player {
 	}
 	
 	public void giveProperty(Property newProperty) {
-		newProperty.owner = name;
+		newProperty.owner = this;
 		properties.add(newProperty);
 	}
 	

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 
-class PropertyData {
+public class PropertyData {
 	public ArrayList<Property> propertyList = new ArrayList<Property>();
 	
 	public Property get(String name) {
