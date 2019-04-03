@@ -26,7 +26,6 @@ public class Player {
 			}
 		}
 		return null;
-
 	}
 	
 	public Player(String n) {
