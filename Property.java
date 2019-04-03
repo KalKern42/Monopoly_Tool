@@ -24,10 +24,10 @@ public class Property {
 		name = n;
 	}
 
-	private ArrayList<Property> findAllOfColor(String color, ArrayList<Property> properties) {
+	private ArrayList<Property> findAllOfColor(String color, ArrayList<Property> listOfProperties) {
 		ArrayList<Property> returnList = new ArrayList<Property>();
 		
-		for (Property property : properties) {
+		for (Property property : listOfProperties) {
 			if (property.color == this.color) {
 				returnList.add(property);
 			}
@@ -61,20 +61,10 @@ public class Property {
 	public int rentPrice() {
 		
 		ArrayList<Property> playerColorMatches = findAllOfColor(this.color, owner.properties);
-		ArrayList<Property> overallColorMatches = findAllOfColor(this.color, Main.properties.propertyList);
+		ArrayList<Property> systemColorMatches = findAllOfColor(this.color, Data.properties.propertyList);
 		
-		if (mortgaged || (owner == null)) {
+		if (mortgaged || owner == null) {
 			return 0;
-		}
-	
-		if (!mortgaged) {
-			if (playerColorMatches.size() == overallColorMatches.size()) {
-				if (!(railroad)) {
-					if (houses != 0) {
-						return houseRent[0] * 2;
-					}
-				}
-			}
 		}
 		
 		if (railroad) {
@@ -84,9 +74,14 @@ public class Property {
 		if (hotel) {
 			return hotelRent;
 		}
-		else {
-			return houseRent[houses];
+		
+		if (playerColorMatches.size() == systemColorMatches.size()) {
+			if (houses == 0) {
+				return houseRent[0] * 2;
+			}
 		}
+
+		return houseRent[houses];
 	} 
 	
 	public String toString() {
