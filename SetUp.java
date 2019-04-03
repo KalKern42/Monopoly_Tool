@@ -10,8 +10,32 @@ public class SetUp {
 		ArrayList<String> illegalNames = new ArrayList<String>();
 		illegalNames.add("kill");
 		illegalNames.add("help");
-			
-		
+		illegalNames.add("mediterranean");
+		illegalNames.add("baltic");
+		illegalNames.add("oriental");
+		illegalNames.add("vermont");
+		illegalNames.add("conneticut");
+		illegalNames.add("st.");
+		illegalNames.add("states");
+		illegalNames.add("virginia");
+		illegalNames.add("tennessee");
+		illegalNames.add("new");
+		illegalNames.add("kentucky");
+		illegalNames.add("indiana");
+		illegalNames.add("illinois");
+		illegalNames.add("atlantic");
+		illegalNames.add("ventor");
+		illegalNames.add("marvin");
+		illegalNames.add("pacific");
+		illegalNames.add("north");
+		illegalNames.add("pensylvania");
+		illegalNames.add("park");
+		illegalNames.add("Boardwalk");
+		illegalNames.add("reading");
+		illegalNames.add("b");
+		illegalNames.add("short");
+		illegalNames.add("electric");
+		illegalNames.add("water");
 		
 		System.out.print("How many players will be enjoying my company?  I will not allow more than 6 or less than 2.  \n");
 		int p = input.nextInt();
