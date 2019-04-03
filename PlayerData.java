@@ -1,20 +1,17 @@
 import java.util.ArrayList;
 
 
-
 public class PlayerData {
-	public  ArrayList<Player> playerList = new ArrayList<Player>();
+	public ArrayList<Player> playerList = new ArrayList<Player>();
 	
 	public Player get(String name) {
-		String caseInsensitive = name.toLowerCase();
 		for (Player player : playerList) {
-			if (player.name.equalsIgnoreCase(caseInsensitive)) {
+			if (player.name.equalsIgnoreCase(name)) {
 				return player;
 			}
 		}
 		return null;
 	}
-	
 	
 	
 	public PlayerData() {
@@ -23,3 +20,4 @@ public class PlayerData {
 	}
 
 }
+

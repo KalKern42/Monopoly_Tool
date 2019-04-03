@@ -5,9 +5,7 @@ import java.util.ArrayList;
 public class PropertyData {
 	public ArrayList<Property> propertyList = new ArrayList<Property>();
 	
-	public Property get(String name) {
-		String caseInsensitive = name.toLowerCase();
-		
+	public Property get(String name) {		
 		for (Property property : propertyList) {
 			if (property.name.equalsIgnoreCase(name)) {
 				return property;
@@ -18,7 +16,6 @@ public class PropertyData {
 	
 	public ArrayList<Property> getByColor(String color) {
 		ArrayList<Property> colored = new ArrayList<Property>();
-		String caseInsensitive = color.toLowerCase();
 		
 		for (Property property : propertyList) {
 			if (property.color.equalsIgnoreCase(color)) {
