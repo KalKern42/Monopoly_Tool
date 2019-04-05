@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
 
+
 class Main {
-	
 	static PropertyData properties = Data.properties;
 	static PlayerData players = Data.players;
+	
 	
 	public static void main(String[] args) {
 		Property ori = properties.get("oriental avenue");
@@ -23,7 +24,6 @@ class Main {
 		p1.giveProperty(r1);
 		p1.giveProperty(r2);
 
-		
 		System.out.println(p1.worth());
 	}
 }

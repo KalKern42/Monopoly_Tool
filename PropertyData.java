@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class PropertyData {
 	public ArrayList<Property> propertyList = new ArrayList<Property>();
 	
+	
 	public Property get(String name) {		
 		for (Property property : propertyList) {
 			if (property.name.equalsIgnoreCase(name)) {
@@ -81,7 +82,6 @@ public class PropertyData {
 		s_a.houseRent = new int[]{10, 50, 150, 450, 625};
 		s_a.hotelRent = 750;
 		propertyList.add(s_a);
-		
 		
 		Property vi_a = new Property("Magenta", "Virginia avenue");
 		vi_a.price = 160;
@@ -238,8 +238,5 @@ public class PropertyData {
 		w_w.price = 150;
 		w_w.mortgage = 75;
 		propertyList.add(w_w);
-		
-		
 	}
-	
 }

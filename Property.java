@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import javax.swing.text.*;
 
+
+
 public class Property {
 	String color = "COLOR MISSSING";
 	String name = "NAME MISSING";
@@ -11,13 +13,11 @@ public class Property {
 	int mortgage = 0;
 	int housePrice = 0;
 	boolean mortgaged = false;
-	
 	int houses = 0;
 	boolean hotel = false;
-		
-	
 	int[] houseRent = new int[]{0, 0, 0, 0, 0};
 	int hotelRent = 0;
+	
 
 	public Property(String c, String n) {
 		color = c;
@@ -34,8 +34,6 @@ public class Property {
 		}
 		return returnList;
 	}
-
-
 
 	public int worth() {
 		int base = mortgage;
@@ -54,12 +52,11 @@ public class Property {
 		if (hotel) {
 			base += housePrice;
 		}
-			
+
 		return base;
 	}
 	
 	public int rentPrice() {
-		
 		ArrayList<Property> playerColorMatches = findAllOfColor(this.color, owner.properties);
 		ArrayList<Property> systemColorMatches = findAllOfColor(this.color, Data.properties.propertyList);
 		

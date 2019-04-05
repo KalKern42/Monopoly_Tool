@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 
+
+
 public class Player {
 	String name = "NAME MISSING";
 	int cash = 1500;
-	
 	ArrayList<Property> properties = new ArrayList<Property>();
+	
 	
 	public int worth() {
 		int net = cash;

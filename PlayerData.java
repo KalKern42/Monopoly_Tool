@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 
 
+
 public class PlayerData {
 	public ArrayList<Player> playerList = new ArrayList<Player>();
+	
 	
 	public Player get(String name) {
 		for (Player player : playerList) {
@@ -12,7 +14,6 @@ public class PlayerData {
 		}
 		return null;
 	}
-	
 	
 	public PlayerData() {
 		Player p1 = new Player("Player1");
