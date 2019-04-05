@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import javax.lang.model.element.*;
 import java.util.ArrayList;
 
 public class SetUp {
@@ -10,6 +9,7 @@ public class SetUp {
 		ArrayList<String> illegalNames = new ArrayList<String>();
 		illegalNames.add("kill");
 		illegalNames.add("help");
+		// add the commands.
 		illegalNames.add("mediterranean");
 		illegalNames.add("baltic");
 		illegalNames.add("oriental");
@@ -30,7 +30,7 @@ public class SetUp {
 		illegalNames.add("north");
 		illegalNames.add("pensylvania");
 		illegalNames.add("park");
-		illegalNames.add("Boardwalk");
+		illegalNames.add("boardwalk");
 		illegalNames.add("reading");
 		illegalNames.add("b");
 		illegalNames.add("short");
@@ -41,7 +41,11 @@ public class SetUp {
 		int p = input.nextInt();
 		
 		while (p < 2 || p > 6) {
-			System.out.println("Try again.");
+			if (p < 2) {
+				System.out.println("No lonley bois, try again. ");
+			} else {
+				System.out.println("No crowds, too complicated, try again.  ");
+			}
 			p = input.nextInt();
 			
 		}
