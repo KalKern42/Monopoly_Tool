@@ -11,6 +11,7 @@ class Main {
 	public static void main(String[] args) {
 		Property ori = properties.get("oriental avenue");
 		ori.houses = 4;
+		ori.mortgaged = true;
 		//ori.hotel = true;
 		commands.propertyStats("short line");
 		commands.propertyStats("oriental avenue");

@@ -8,16 +8,20 @@ public class CommandMethods {
 	
 	
 
-	
 	public void propertyStats(String propertyName) {
 		Property property = properties.get(propertyName);
 		String icon = Misc.getIconForProperty(property);		
-				
-		String printOut = property + " - $" + property.price + icon 		+ "\n\t"
-						+ "owner : " + property.owner 						+ "\n\t"
-						+ "color : " + property.color						+ "\n\n"
+		
+		String printOut = property + "\t\t\t\t" + icon						+ "\n\t"
+						+ "price\t\t : $"+ property.price					+ "\n\t"
+						+ "current rent\t : $" + property.rentPrice()		+ "\n\t"
+						+ "owner\t\t : " + property.owner 					+ "\n\t"
+						+ "color\t\t : " + property.color					+ "\n\t"
+						+ "possible rents\t" 								+ "\n\t"
+						+	"\tdefault\t : $" + property.houseRent[0]			+ "\n\t"
+							//TODO: houses, hotels
+						+ "mortgage value\t : $" + property.mortgage 		+ "\n\n";
 						
-;						
 		System.out.print(printOut);
 	}
 	

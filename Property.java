@@ -57,12 +57,12 @@ public class Property {
 	}
 	
 	public int rentPrice() {
-		ArrayList<Property> playerColorMatches = findAllOfColor(this.color, owner.properties);
-		ArrayList<Property> systemColorMatches = findAllOfColor(this.color, Data.properties.propertyList);
-		
 		if (mortgaged || owner == null) {
 			return 0;
 		}
+		
+		ArrayList<Property> playerColorMatches = findAllOfColor(this.color, owner.properties);
+		ArrayList<Property> systemColorMatches = findAllOfColor(this.color, Data.properties.propertyList);
 		
 		if (railroad) {
 			return 25 * (int)Math.pow(2, playerColorMatches.size() - 1);

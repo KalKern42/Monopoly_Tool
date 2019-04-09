@@ -6,20 +6,27 @@ public class Misc {
 	
 	public static String getIconForProperty(Property property) {
 		String icon = "🏠";
+		String ANSI_RESET = "\u001B[0m";
+		String ANSI_RED = "\u001B[31m";
+		
+		if (property.mortgaged) {
+			icon = ANSI_RED + "MORTGAGED" + ANSI_RESET;
+			return icon;
+		}
 		
 		if  (!property.hotel) {
-			icon = "\t\t" + repeat(icon, property.houses);
+			icon = repeat(icon, property.houses);
 		}
 		else {
-			icon = "\t\t🏨";
+			icon = "🏨";
 		}
 		
 		if (property.railroad == true) {
-			icon = "\t\t🚂";
+			icon = "🚂";
 		}
 		
 		if (property.utility == true) {
-			icon = "\t\t🔧";
+			icon = "🔧";
 		}
 		return icon;
 	}
