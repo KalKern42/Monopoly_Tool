@@ -8,11 +8,14 @@ the structure needed for commands to operate the
 import java.util.Scanner;
 
 class Commands {
-	public static void commandudes(String[] args) {
+	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int stayIn = 0;
-		String usrImpt = "";
+		String usrImpt = ""; //for basic commands and leaving the loop
 		String commTarget = "";
+		String actCommand = "";
+		String[] comHands = new String[5]; //for the more complex commands requiring more than one target (also sorry for the pun)
+		
 		
 		System.out.println("Begining Monopoly Commands..... ");
 		System.out.println("(type: 'let me out' to leave)");
@@ -20,6 +23,11 @@ class Commands {
 		while (stayIn == 0) {
 			System.out.print("Monopoly User: ");
 			usrImpt = input.nextLine();
+			usrImpt = usrImpt.toLowerCase();
+			comHands = usrImpt.split("//W+");
+			for (int i = 0; i < comHands.length; i++){ // dont forget to delete this
+				System.out.println(comHands[i]);
+			}
 /* these are going to be the commands. 
 Adding a new comand looks like:
 elif (usrImpt.contains(command name){
@@ -29,7 +37,9 @@ elif (usrImpt.contains(command name){
 				stayIn = 1;
 			}else if (usrImpt.contains("kill")) {
 				commTarget = commandMod(usrImpt, 4);
-				System.out.println(commTarget);//this line is just a test
+				System.out.println(commTarget + "2");//this line is just a test
+			}else if (usrImpt.contains("trade")) {
+				actCommand = "trade"; 
 			}
 		}
 	}
@@ -37,5 +47,13 @@ elif (usrImpt.contains(command name){
 		//some commands have specific targets such as players or properties, this method is designed to "grab" such things
 		String modd = command.substring(commLenth + 1);
 		return(modd);		
+	}
+	public static String commandPlex(String[] commBit, String actCommand){
+		String[] commTarg = new String[2];
+		for (int i = 0; i < commBit.length; i++){
+			if (commBit[i] != actCommand) {
+				commTarg = commBit[i];
+			}
+		}
 	}
 }
