@@ -14,6 +14,7 @@ class Main {
 		//ori.hotel = true;
 		commands.propertyStats("short line");
 		commands.propertyStats("oriental avenue");
+		commands.rules(); 
 
 	}
 }
