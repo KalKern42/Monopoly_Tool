@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 
+
 public class CommandMethods {
 	PropertyData properties = Data.properties;
 	PlayerData players = Data.players;

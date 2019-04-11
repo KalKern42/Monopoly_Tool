@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 
+
 class Main {
 	static PropertyData properties = Data.properties;
 	static PlayerData players = Data.players;
