@@ -10,6 +10,7 @@ public class Player {
 	
 	public int worth() {
 		int net = cash;
+		
 		for (Property property : properties) {
 			net += property.worth();
 		}

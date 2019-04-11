@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class PropertyData {
 	public ArrayList<Property> propertyList = new ArrayList<Property>();
 	
-	
+
 	public Property get(String name) {		
 		for (Property property : propertyList) {
 			if (property.name.equalsIgnoreCase(name)) {

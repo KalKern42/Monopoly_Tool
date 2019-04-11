@@ -11,7 +11,10 @@ public class Misc {
 	public static final String ANSI_RESET = "\u001B[0m";
 	public static final String ANSI_RED = "\u001B[31m";
 	public static final String ANSI_BOLD = "\033[1;92m";
-
+	public static final String HOUSE = "🏠";
+	public static final String HOTEL = "🏨";
+	public static final String RAILROAD = "🚂";
+	public static final String UTILITY = "🔧";
 	
 	public static String repeat(String src, int rep) {
 		return new String(new char[rep]).replace("\0", src);
@@ -29,7 +32,7 @@ public class Misc {
 		}
 	
 	public static String getIconForProperty(Property property) {
-		String icon = "🏠";
+		String icon = HOUSE;
 
 		if (property.mortgaged) {
 			icon = ANSI_RED + "MORTGAGED" + ANSI_RESET;
@@ -40,15 +43,15 @@ public class Misc {
 			icon = repeat(icon, property.houses);
 		}
 		else {
-			icon = "🏨";
+			icon = HOTEL;
 		}
 		
 		if (property.railroad == true) {
-			icon = "🚂";
+			icon = RAILROAD;
 		}
 		
 		if (property.utility == true) {
-			icon = "🔧";
+			icon = UTILITY;
 		}
 		return icon;
 	}
@@ -65,7 +68,7 @@ public class Misc {
 					rents += ANSI_BOLD;
 				}
 				
-				String trains = repeat("🚂", i);
+				String trains = repeat(RAILROAD, i);
 				String conditionalTab = (i<4 ? "\t  : $" : " : $");
 				rents += ("\t" + trains + conditionalTab + priceAtRailroadsOwned + ANSI_RESET + "\n\t"); 
 			}
@@ -77,12 +80,12 @@ public class Misc {
 			if (numOwnerUtilities == 1) {
 				rents += ANSI_BOLD;
 			}
-			rents += "\t🔧\t  : roll * $4" + ANSI_RESET + "\n\t";
+			rents += "\t" + UTILITY + "\t  : roll * $4" + ANSI_RESET + "\n\t";
 			
 			if (numOwnerUtilities == 2) {
 				rents += ANSI_BOLD;
 			}
-			rents += "\t🔧🔧\t  : roll * $10" + ANSI_RESET + "\n\t";
+			rents += "\t" + UTILITY + UTILITY + "\t  : roll * $10" + ANSI_RESET + "\n\t";
 		}
 		
 		else {								// STANDARD
@@ -102,7 +105,7 @@ public class Misc {
 				if (property.houses == i) {
 					rents += ANSI_BOLD;
 				}
-				String houses = repeat("🏠", i);
+				String houses = repeat(HOUSE, i);
 				String conditionalTab = (i<4 ? "\t  : $" : " : $");
 				rents += ("\t" + houses + conditionalTab + priceAtHousesOwned + ANSI_RESET + "\n\t"); 
 			}
@@ -110,7 +113,7 @@ public class Misc {
 			if (property.hotel) { // hotel
 				rents += ANSI_BOLD;
 			}
-			rents += "\t🏨\t  : $" + property.hotelRent + ANSI_RESET + "\n\t";
+			rents += "\t" + HOTEL + "\t  : $" + property.hotelRent + ANSI_RESET + "\n\t";
 		}
 		
 		if (property.mortgaged == true) {	// MORTGAGED PROPERTIES
