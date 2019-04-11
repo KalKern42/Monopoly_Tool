@@ -1,5 +1,14 @@
 public class Misc {
 	
+	
+	public static String getRentInfo(Property property) {
+		String rents =	"\tdefault\t : $" + property.houseRent[0]		+ "\n\t";
+		
+		rents += "\tfull set : $" + (property.houseRent[0] * 2)+ "\n\t";
+		
+		return rents;
+	}
+	
 	public static String repeat(String src, int rep) {
 		return new String(new char[rep]).replace("\0", src);
 	}
