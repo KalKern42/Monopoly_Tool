@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 
-
 public class CommandMethods {
 	PropertyData properties = Data.properties;
 	PlayerData players = Data.players;
@@ -14,7 +13,6 @@ public class CommandMethods {
 		
 		final String ANSI_RESET = "\u001B[0m";
 		final String ANSI_BOLD = "\033[1;99m";
-		
 		String title = ANSI_BOLD + property.toString().toUpperCase() + ANSI_RESET;
 		
 		String printOut = title	+ "\t\t\t\t" + icon 					+  "\n\t"
