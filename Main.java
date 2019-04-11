@@ -9,13 +9,12 @@ class Main {
 
 	
 	public static void main(String[] args) {
-		Property ori = properties.get("oriental avenue");
-		ori.houses = 4;
-		ori.mortgaged = true;
-		//ori.hotel = true;
-		commands.propertyStats("short line");
-		commands.propertyStats("oriental avenue");
+	
+		Player p1 = players.get("Player1");
+		Property prop = properties.get("water works");	
+		p1.giveProperty(prop);
 
+		commands.propertyStats("water works");
 	}
 }
 

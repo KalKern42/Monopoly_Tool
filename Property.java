@@ -24,16 +24,7 @@ public class Property {
 		name = n;
 	}
 
-	private ArrayList<Property> findAllOfColor(String color, ArrayList<Property> listOfProperties) {
-		ArrayList<Property> returnList = new ArrayList<Property>();
-		
-		for (Property property : listOfProperties) {
-			if (property.color == this.color) {
-				returnList.add(property);
-			}
-		}
-		return returnList;
-	}
+	
 
 	public int worth() {
 		int base = mortgage;
@@ -61,8 +52,8 @@ public class Property {
 			return 0;
 		}
 		
-		ArrayList<Property> playerColorMatches = findAllOfColor(this.color, owner.properties);
-		ArrayList<Property> systemColorMatches = findAllOfColor(this.color, Data.properties.propertyList);
+		ArrayList<Property> playerColorMatches = Misc.findAllOfColor(this.color, owner.properties);
+		ArrayList<Property> systemColorMatches = Misc.findAllOfColor(this.color, Data.properties.propertyList);
 		
 		if (railroad) {
 			return 25 * (int)Math.pow(2, playerColorMatches.size() - 1);
