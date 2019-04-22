@@ -5,7 +5,8 @@ Date: 3/28/19
 the structure needed for commands to operate the 
 */
 
-import java.util.Scanner;
+import java.util.*;
+import javax.xml.bind.attachment.*;
 
 class Commands {
 	public static void main(String[] args) {
@@ -24,7 +25,7 @@ class Commands {
 			System.out.print("Monopoly User: ");
 			usrImpt = input.nextLine();
 			usrImpt = usrImpt.toLowerCase();
-			comHands = usrImpt.split("//W+");
+			comHands = usrImpt.split(" ");
 			for (int i = 0; i < comHands.length; i++){ // dont forget to delete this
 				System.out.println(comHands[i]);
 			}
@@ -39,7 +40,11 @@ elif (usrImpt.contains(command name){
 				commTarget = commandMod(usrImpt, 4);
 				System.out.println(commTarget + "2");//this line is just a test
 			}else if (usrImpt.contains("trade")) {
-				actCommand = "trade"; 
+				actCommand = "trade";
+				comHands = commandPlex(comHands, actCommand);
+				System.out.println(comHands[0]);
+				System.out.println(comHands[1]);
+				System.out.println(comHands[2]);
 			}
 		}
 	}
@@ -48,12 +53,17 @@ elif (usrImpt.contains(command name){
 		String modd = command.substring(commLenth + 1);
 		return(modd);		
 	}
-	public static String commandPlex(String[] commBit, String actCommand){
-		String[] commTarg = new String[2];
-		for (int i = 0; i < commBit.length; i++){
+	public static String[] commandPlex(String[] commBit, String actCommand){
+		
+		// HEP MEH I NEED SOME FIXING DONT FORGET ME
+		String[] commTarg = new String[5];
+		int i = 0;
+		while (i < commBit.length){
 			if (commBit[i] != actCommand) {
-				commTarg = commBit[i];
+				commTarg[i] = commBit[i];
+				i++;
 			}
 		}
+		return(commTarg);
 	}
 }
