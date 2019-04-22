@@ -80,13 +80,18 @@ public class CommandMethods {
 			final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  
 			final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m"; 
 		
-		System.out.println(WHITE_BOLD + RED_BACKGROUND + "MONOPOLY" + RESET + WHITE_BACKGROUND);
-		System.out.println(BLACK_BOLD + "Rules");
+		System.out.println(WHITE_BOLD_BRIGHT + RED_BACKGROUND + "\t\t\tMONOPOLY");
+		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + "Rules");
 		System.out.println("\n How to win");
 		System.out.println(BLACK + WHITE_BACKGROUND + "\tMove around the board buying as many properties as you can. The more you own, the more rent you'll ba able to collect from other players. \n\tIf you're the last player with money when all the other players have gone bankrupt, you win! ");
 		System.out.println(BLACK_BOLD + "\n Who goes first?");
 		System.out.println(BLACK + WHITE_BACKGROUND + "\tEach player rolls both dice. \n\tThe highest roller starts first, and play moves to the left. ");
-	}
+		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + "\n On Your turn");
+		System.out.println(BLACK + WHITE_BACKGROUND + "\t1.  Roll both dice.\n\t2.  Move your token clockwise that number of spaces.\n\t3.  Where did you land? Carry out the rules of that board space. See " + BLACK_BOLD + "spaces." + BLACK_BOLD + WHITE_BACKGROUND + "\n\t\tDid you roll a double?" + BLACK + WHITE_BACKGROUND + "\n\t\tRoll the dice again and take another turn.\n\n" + BLACK_BOLD + WHITE_BACKGROUND + "\t\tWatch out!" + BLACK + WHITE_BACKGROUND + " If you roll a double 3 times in a row, you must immediately Go To Jail! Do not complete your third turn. \n\t4.  Your turn ends. Pass the dice to your left.");
+		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + "\n Start playing!");
+		System.out.println(BLACK + WHITE_BACKGROUND + "\tThat's all you need to know, so get going. \nLook up the spaces as you land on them.");
+		
+	}	
 
 	
 	
