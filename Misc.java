@@ -70,7 +70,7 @@ public class Misc {
 				
 				String trains = repeat(RAILROAD, i);
 				String conditionalTab = (i<4 ? "\t  : $" : " : $");
-				rents += ("\t" + trains + conditionalTab + priceAtRailroadsOwned + ANSI_RESET + "\n\t"); 
+				rents += ("   " + trains + "\t" + conditionalTab + priceAtRailroadsOwned + ANSI_RESET + "\n\t"); 
 			}
 		}
 			
@@ -80,24 +80,24 @@ public class Misc {
 			if (numOwnerUtilities == 1) {
 				rents += ANSI_BOLD;
 			}
-			rents += "\t" + UTILITY + "\t  : roll * $4" + ANSI_RESET + "\n\t";
+			rents += "   " + UTILITY + "\t  : roll * $4" + ANSI_RESET + "\n\t";
 			
 			if (numOwnerUtilities == 2) {
 				rents += ANSI_BOLD;
 			}
-			rents += "\t" + UTILITY + UTILITY + "\t  : roll * $10" + ANSI_RESET + "\n\t";
+			rents += "   " + UTILITY + UTILITY + "\t  : roll * $10" + ANSI_RESET + "\n\t";
 		}
 		
 		else {								// STANDARD
 			if (rentPrice == property.houseRent[0]) {
 				rents += ANSI_BOLD;
 			}
-			rents += "\tdefault\t  : $" + property.houseRent[0] + ANSI_RESET + "\n\t";
+			rents += "   default\t: $" + property.houseRent[0] + ANSI_RESET + "\n\t";
 			
 			if (rentPrice == property.houseRent[0] * 2) {
 				rents += ANSI_BOLD;
 			}			
-			rents += "\tfull set  : $" + (property.houseRent[0] * 2) + ANSI_RESET + "\n\t";
+			rents += "   full set\t: $" + (property.houseRent[0] * 2) + ANSI_RESET + "\n\t";
 				
 			for (int i = 1; i <= 4; i++) { // per house
 				int priceAtHousesOwned = property.houseRent[i];
@@ -106,20 +106,72 @@ public class Misc {
 					rents += ANSI_BOLD;
 				}
 				String houses = repeat(HOUSE, i);
-				String conditionalTab = (i<4 ? "\t  : $" : " : $");
-				rents += ("\t" + houses + conditionalTab + priceAtHousesOwned + ANSI_RESET + "\n\t"); 
+				String conditionalTab = (i<3 ? "\t\t: $" : "\t: $");
+				rents += ("   " + houses + conditionalTab + priceAtHousesOwned + ANSI_RESET + "\n\t"); 
 			}
 			
 			if (property.hotel) { // hotel
 				rents += ANSI_BOLD;
 			}
-			rents += "\t" + HOTEL + "\t  : $" + property.hotelRent + ANSI_RESET + "\n\t";
+			rents += "   " + HOTEL + "\t\t: $" + property.hotelRent + ANSI_RESET + "\n\t";
 		}
 		
 		if (property.mortgaged == true) {	// MORTGAGED PROPERTIES
-			rents += "\t" + ANSI_RED + "MORTGAGED : $0 \n\t" + ANSI_RESET;
+			rents += "   " + ANSI_RED + "MORTGAGED : $0 \n\t" + ANSI_RESET;
 		}
 		
 		return rents;
 	}
+	
+	
+	public static String createPropertyList(ArrayList<Property> properties, String prefix) {
+		String printOut = "";
+		for (Property property : properties) {
+			String icon = getIconForProperty(property);
+			String conditionalTab = "";
+			if (icon.length() < 6) {
+				conditionalTab = "\t";
+			}
+			
+			String conditionalTab2 = "";
+			if (property.name.length() < 16) {
+				conditionalTab2 += "\t";
+			}
+			
+			printOut += prefix + icon + "\t" + conditionalTab + property.toString() + "\t" + conditionalTab2 + property.color.toUpperCase() + "\n";
+		}
+		return printOut;
+	}
+	
+	public static String createAllPropertyList(String prefix) {
+		ArrayList<Property> properties = Main.properties.propertyList;
+		String printOut = "";
+		for (Property property : properties) {
+			String icon = getIconForProperty(property);
+			String conditionalTab = "";
+			if (icon.length() < 6) {
+				conditionalTab = "\t";
+			}
+			
+			String conditionalTab2 = "";
+			if (property.name.length() < 16) {
+				conditionalTab2 += "\t";
+			}
+
+			
+			String conditionalTab3 = "";
+			if (property.color.length() < 8) {
+				conditionalTab3 += "\t";
+			}
+			
+			String owner = "";
+			if (property.owner != null) {
+				owner = property.owner.toString();
+			}
+						printOut += prefix + icon + "\t" + conditionalTab + property.toString() + "\t" + conditionalTab2 + property.color.toUpperCase() + conditionalTab3 + "\t" + owner + "\n";
+			
+		}
+		return printOut;
+	}
+	
 }

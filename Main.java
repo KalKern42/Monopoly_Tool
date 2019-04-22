@@ -11,10 +11,21 @@ class Main {
 	public static void main(String[] args) {
 	
 		Player p1 = players.get("Player1");
-		Property prop = properties.get("boardwalk");	
+		Property prop = properties.get("boardwalk");
+		Property prop2 = properties.get("mediterranean avenue");
+		Property prop3 = properties.get("new york avenue");
+		
+		p1.giveProperty(prop2);
+		p1.giveProperty(prop3);
+		prop.houses = 4;
+		prop2.houses = 2;
+		prop3.houses = 3;
 		p1.giveProperty(prop);
 
-		commands.propertyStats("boardwalk");
+		commands.propertyStats(prop);
+		commands.playerStats(p1);
+		commands.playerProperties(p1);
+		commands.allProperties();
 	}
 }
 
