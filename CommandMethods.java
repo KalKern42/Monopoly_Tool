@@ -89,14 +89,13 @@ public class CommandMethods {
 					railroads++;
 				}
 				if (property.utility) {
-					utilities ++;
+					utilities++;
 				}
 			}
-			printOut += "\n\t    🏠\t: " + houses;
-			printOut += "\n\t    🏨\t: " + hotels;
 			printOut += "\n\t    🚂\t: " + railroads;
 			printOut += "\n\t    🔧\t: " + utilities;
-
+			printOut += "\n\t    🏠\t: " + houses;
+			printOut += "\n\t    🏨\t: " + hotels;
 		}
 		
 		System.out.print(printOut);
