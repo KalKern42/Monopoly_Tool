@@ -144,7 +144,7 @@ public class Misc {
 	}
 	
 	public static String createAllPropertyList(String prefix) {
-		ArrayList<Property> properties = Main.properties.propertyList;
+		ArrayList<Property> properties = Data.properties.propertyList;
 		String printOut = "";
 		for (Property property : properties) {
 			String icon = getIconForProperty(property);

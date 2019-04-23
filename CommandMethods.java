@@ -42,7 +42,7 @@ public class CommandMethods {
 		String printOut = title	 			  					+  "\n\t"
 						+ "balance\t\t : $" + player.cash		+ "\n\t"
 						+ "net worth\t : $" + player.worth()	+ "\n\t"
-						+ "properties\n"
+						+ "properties (" + player.properties.size() + ")\n"
 						+ Misc.createPropertyList(player.properties, "\t  ") + "\n";
 						
 		System.out.print(printOut);
@@ -54,17 +54,51 @@ public class CommandMethods {
 	}
 	
 	public void playerProperties(Player player) {
-		String title = ANSI_BOLD + player.toString().toUpperCase() + " PROPERTIES" + ANSI_RESET;
+		String title = ANSI_BOLD + player.toString().toUpperCase() + " PROPERTIES (" + player.properties.size() + ")" + ANSI_RESET;
 		String printOut = title + "\n"
 						+ Misc.createPropertyList(player.properties, "\t  ") + "\n";
 		System.out.print(printOut);
 	}
 	
 	public void allProperties() {
-		String title = ANSI_BOLD + "PROPERTIES" + ANSI_RESET;
+		String title = ANSI_BOLD + "PROPERTIES (" + Data.properties.propertyList.size() + ")" + ANSI_RESET;
 		String printOut = title + "\n"
 						+ Misc.createAllPropertyList("\t  ") + "\n";
 		System.out.print(printOut);
+	}
+	
+	public void playersOverview() {
+		String title = ANSI_BOLD + "PLAYERS (" + Data.players.playerList.size() + ")" + ANSI_RESET;
+		String printOut = title + "\n";
 		
+		for (Player player : Data.players.playerList) {
+			printOut += "\t" + player;
+			printOut += "\n\t  balance\t: $" + player.cash;
+			printOut += "\n\t  net worth\t: $" + player.worth();
+			printOut += "\n\t  properties\t: " + player.properties.size();
+			int railroads = 0;
+			int utilities = 0;
+			int houses = 0;
+			int hotels = 0;
+			for (Property property : player.properties) {
+				houses += property.houses;
+				if (property.hotel) {
+					hotels++;
+				}
+				if (property.railroad) {
+					railroads++;
+				}
+				if (property.utility) {
+					utilities ++;
+				}
+			}
+			printOut += "\n\t    🏠\t: " + houses;
+			printOut += "\n\t    🏨\t: " + hotels;
+			printOut += "\n\t    🚂\t: " + railroads;
+			printOut += "\n\t    🔧\t: " + utilities;
+
+		}
+		
+		System.out.print(printOut);
 	}
 }

@@ -20,12 +20,15 @@ class Main {
 		prop.houses = 4;
 		prop2.houses = 2;
 		prop3.houses = 3;
+		prop3.hotel = true;
 		p1.giveProperty(prop);
 
 		commands.propertyStats(prop);
 		commands.playerStats(p1);
-		commands.playerProperties(p1);
-		commands.allProperties();
+		//commands.playerProperties(p1);
+		//commands.allProperties();
+		commands.playersOverview();
+		
 	}
 }
 
