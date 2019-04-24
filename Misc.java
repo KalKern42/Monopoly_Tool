@@ -69,8 +69,8 @@ public class Misc {
 				}
 				
 				String trains = repeat(RAILROAD, i);
-				String conditionalTab = (i<4 ? "\t  : $" : " : $");
-				rents += ("   " + trains + "\t" + conditionalTab + priceAtRailroadsOwned + ANSI_RESET + "\n\t"); 
+				String conditionalTab = (i<3 ? "\t : $" : " : $");
+				rents += ("  " + trains + "\t" + conditionalTab + priceAtRailroadsOwned + ANSI_RESET + "\n\t"); 
 			}
 		}
 			
@@ -80,24 +80,24 @@ public class Misc {
 			if (numOwnerUtilities == 1) {
 				rents += ANSI_BOLD;
 			}
-			rents += "   " + UTILITY + "\t  : roll * $4" + ANSI_RESET + "\n\t";
+			rents += "  " + UTILITY + "\t  : roll * $4" + ANSI_RESET + "\n\t";
 			
 			if (numOwnerUtilities == 2) {
 				rents += ANSI_BOLD;
 			}
-			rents += "   " + UTILITY + UTILITY + "\t  : roll * $10" + ANSI_RESET + "\n\t";
+			rents += "  " + UTILITY + UTILITY + "\t  : roll * $10" + ANSI_RESET + "\n\t";
 		}
 		
 		else {								// STANDARD
 			if (rentPrice == property.houseRent[0]) {
 				rents += ANSI_BOLD;
 			}
-			rents += "   default\t: $" + property.houseRent[0] + ANSI_RESET + "\n\t";
+			rents += "  default\t: $" + property.houseRent[0] + ANSI_RESET + "\n\t";
 			
 			if (rentPrice == property.houseRent[0] * 2) {
 				rents += ANSI_BOLD;
 			}			
-			rents += "   full set\t: $" + (property.houseRent[0] * 2) + ANSI_RESET + "\n\t";
+			rents += "  full set\t: $" + (property.houseRent[0] * 2) + ANSI_RESET + "\n\t";
 				
 			for (int i = 1; i <= 4; i++) { // per house
 				int priceAtHousesOwned = property.houseRent[i];
@@ -107,17 +107,17 @@ public class Misc {
 				}
 				String houses = repeat(HOUSE, i);
 				String conditionalTab = (i<3 ? "\t\t: $" : "\t: $");
-				rents += ("   " + houses + conditionalTab + priceAtHousesOwned + ANSI_RESET + "\n\t"); 
+				rents += ("  " + houses + conditionalTab + priceAtHousesOwned + ANSI_RESET + "\n\t"); 
 			}
 			
 			if (property.hotel) { // hotel
 				rents += ANSI_BOLD;
 			}
-			rents += "   " + HOTEL + "\t\t: $" + property.hotelRent + ANSI_RESET + "\n\t";
+			rents += "  " + HOTEL + "\t\t: $" + property.hotelRent + ANSI_RESET + "\n\t";
 		}
 		
 		if (property.mortgaged == true) {	// MORTGAGED PROPERTIES
-			rents += "   " + ANSI_RED + "MORTGAGED : $0 \n\t" + ANSI_RESET;
+			rents += "  " + ANSI_RED + "MORTGAGED : $0 \n\t" + ANSI_RESET;
 		}
 		
 		return rents;

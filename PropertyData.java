@@ -27,7 +27,7 @@ public class PropertyData {
 	}
 	
 	public PropertyData() {
-		Property m_a = new Property("purple", "Mediterranean avenue");
+		Property m_a = new Property("brown", "Mediterranean avenue");
 		m_a.price = 60;
 		m_a.mortgage = 30;
 		m_a.housePrice = 50;
@@ -35,7 +35,7 @@ public class PropertyData {
 		m_a.hotelRent = 250;
 		propertyList.add(m_a);
 		
-		Property b_a = new Property("purple", "Baltic avenue");
+		Property b_a = new Property("brown", "Baltic avenue");
 		b_a.price = 60;
 		b_a.mortgage = 30;
 		b_a.housePrice = 50;

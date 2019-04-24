@@ -24,9 +24,9 @@ public class CommandMethods {
 						+ "price\t\t : $"+ property.price				+ "\n\t"
 						+ "owner\t\t : " + property.owner 				+ "\n\t"
 						+ "color set\t : " + property.color				+ "\n\t"
+						+ "mortgage value\t : $" + property.mortgage 	+ "\n\t"
 						+ "rent prices\t" 								+ "\n\t"
-						 +	Misc.getRentInfo(property)
-						+ "mortgage value\t : $" + property.mortgage 	+ "\n\n";
+						 +	Misc.getRentInfo(property) + "\n";
 						
 		System.out.print(printOut);
 	}
@@ -100,5 +100,35 @@ public class CommandMethods {
 		System.out.print(printOut);
 	}
 	
+	public void propertiesByType(String color) {
+		ArrayList<Property> properties = Misc.findAllOfColor(color, Data.properties.propertyList);
+		
+		String keyName = color.toUpperCase() + " PROPERTIES";
+		if (color == "railroad") {
+			keyName = "RAILROADS";
+		}
+		if (color == "utility") {
+			keyName = "UTILITIES";
+		}		
+		
+		String title = ANSI_BOLD + keyName + " (" + properties.size() + ")" + ANSI_RESET;
+		
+		String printOut = title + "\n";
+		for (Property property : properties) {
+			String owner = "";
+			if (property.owner != null) {
+				owner = property.owner.name;
+			}
+			
+			String conditionalTab = "";
+			if (property.name.length() < 16) {
+				conditionalTab += "\t";
+			}
+			
+			printOut += "\t" + property + "\t" + conditionalTab + owner + "\n";
+		}
+		
+		System.out.print(printOut);
+	}
 	
 }

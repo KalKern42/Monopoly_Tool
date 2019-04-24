@@ -14,7 +14,7 @@ class Main {
 		Player p2 = players.get("Player2");
 		Property prop = properties.get("boardwalk");
 		Property prop2 = properties.get("mediterranean avenue");
-		Property prop3 = properties.get("new york avenue");
+		Property prop3 = properties.get("baltic avenue");
 		
 		p1.giveProperty(prop2);
 		p1.giveProperty(prop3);
@@ -24,12 +24,12 @@ class Main {
 		prop3.hotel = true;
 		p1.giveProperty(prop);
 
-		//commands.propertyStats(prop);
+		commands.propertyStats(prop);
 		//commands.playerStats(p1);
 		//commands.playerProperties(p1);
 		//commands.allProperties();
 		//commands.playersOverview();
-		
+		commands.propertiesByType("dark blue");
 	}
 }
 
