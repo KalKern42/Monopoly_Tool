@@ -7,6 +7,7 @@ public class CommandMethods {
 	PlayerData players = Data.players;
 	final String ANSI_RESET = "\u001B[0m";
 	final String ANSI_BOLD = "\033[1;99m";
+	final String ANSI_UNDERLINE = "\033[4;39m";
 
 	public void propertyStats(String propertyName) {
 		Property property = properties.get(propertyName);
@@ -72,32 +73,32 @@ public class CommandMethods {
 		String printOut = title + "\n";
 		
 		for (Player player : Data.players.playerList) {
-			printOut += "\t" + player;
-			printOut += "\n\t  balance\t: $" + player.cash;
-			printOut += "\n\t  net worth\t: $" + player.worth();
-			printOut += "\n\t  properties\t: " + player.properties.size();
+			printOut += "   " + ANSI_UNDERLINE + player + ANSI_RESET;
+			printOut += "\n\tbalance\t\t: $" + player.cash;
+			printOut += "\n\tnet worth\t: $" + player.worth();
+			printOut += "\n\tproperties (" + player.properties.size() + ")\n";
 			int railroads = 0;
 			int utilities = 0;
-			int houses = 0;
-			int hotels = 0;
+			int normals = 0;
 			for (Property property : player.properties) {
-				houses += property.houses;
-				if (property.hotel) {
-					hotels++;
-				}
 				if (property.railroad) {
 					railroads++;
 				}
 				if (property.utility) {
 					utilities++;
 				}
+				if (!(property.railroad || property.utility)) {
+					normals++;
+				}
 			}
-			printOut += "\n\t    🚂\t: " + railroads;
-			printOut += "\n\t    🔧\t: " + utilities;
-			printOut += "\n\t    🏠\t: " + houses;
-			printOut += "\n\t    🏨\t: " + hotels;
+			
+			printOut += Misc.createPropertyList(player.properties, "\t  ");
+			printOut += "\n";
+
 		}
 		
 		System.out.print(printOut);
 	}
+	
+	
 }
