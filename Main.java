@@ -24,12 +24,14 @@ class Main {
 		prop3.hotel = true;
 		p1.giveProperty(prop);
 
-		commands.propertyStats(prop);
+		//commands.propertyStats(prop);
 		//commands.playerStats(p1);
 		//commands.playerProperties(p1);
 		//commands.allProperties();
 		//commands.playersOverview();
-		commands.propertiesByType("dark blue");
+		//commands.propertiesByType("dark blue");
+		//commands.transferMoney("Player1", "Player2", -50);
+		commands.payRent(p2, prop);
 	}
 }
 

@@ -128,7 +128,87 @@ public class CommandMethods {
 			printOut += "\t" + property + "\t" + conditionalTab + owner + "\n";
 		}
 		
+		System.out.print(printOut + "\n");
+	}
+	
+	
+	public void incrementMoney(String playerName, int delta) {
+		Player player = players.get(playerName);
+		incrementMoney(player, delta);
+	}
+	
+	
+	public void incrementMoney(Player player, int delta) {
+		int initialBalance = player.cash;
+		int postRentBalance = initialBalance + delta;
+		String newBalance = "" + (postRentBalance);
+		
+		if (postRentBalance < 0) {
+			newBalance = "-$" + Math.abs(initialBalance + delta);
+		}
+		else {
+			newBalance = "$" + newBalance;
+		}
+		
+		String color = "\033[0;93m";
+		if (delta > 0) {
+			color = "\033[1;92m";
+		}
+		else if( delta < 0) {
+			color = "\033[0;91m";
+		}
+		String printOut = "";
+		printOut += player.toString().toUpperCase();
+		printOut += " : $" + initialBalance;
+		printOut += " → " + color + newBalance + ANSI_RESET + "\n";
+		
+		player.cash = postRentBalance;
+		
 		System.out.print(printOut);
 	}
 	
+	public void transferMoney(String fromName, String toName, int delta) {
+		Player from = players.get(fromName);
+		Player to = players.get(toName);
+		transferMoney(from, to, delta);
+	}
+	
+	public void transferMoney(Player from, Player to, int delta) {
+		String first = from.toString().toUpperCase();
+		String second = to.toString().toUpperCase();
+		if (delta < 0) {
+			first = to.toString().toUpperCase();
+			second = from.toString().toUpperCase();
+		}
+		System.out.print(ANSI_BOLD + "Transferring $" + Math.abs(delta) + " from " + first + " to " + second + "\n" + ANSI_RESET);
+		if (delta < 0) {
+			incrementMoney(to, delta);
+			incrementMoney(from, -delta);
+		}
+		else {
+			incrementMoney(from, -delta);
+			incrementMoney(to, delta);
+		}
+	}
+	
+	public void payRent(String playerName, String propertyName) {
+		Player player = players.get(playerName);
+		Property property = properties.get(propertyName);
+		payRent(player, property);
+	}
+	
+	public void payRent(Player player, Property property) {
+		int rentDue = property.rentPrice();
+		String printOut = ANSI_BOLD + property.name.toUpperCase() + ":" + ANSI_RESET;
+		
+		if (rentDue == 0 || property.owner.name == player.name) {
+			System.out.print(printOut + "\033[1;92m No rent due!");
+			return;
+		}
+		
+		printOut += "\033[0;91m $" +  rentDue + " RENT" + ANSI_RESET;
+		System.out.print(printOut + "\n");
+		transferMoney(player, property.owner, rentDue);
+
+	}	
 }
