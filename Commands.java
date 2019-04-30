@@ -40,7 +40,7 @@ elif (usrImpt.contains(command name){
 			}else if (usrImpt.contains("trade")) {
 				actCommand = "trade";
 				System.out.println(actCommand + " blep");
-				comHands = commandPlex(comHands, actCommand);
+				comHands = commandPlex(comHands, "trade");
 				System.out.println(comHands[1]);
 			}
 		}
@@ -58,11 +58,16 @@ elif (usrImpt.contains(command name){
 		
 		for (int c = 0; c < commBit.length; c++){
 			storage = commBit[c];
-			
+			System.out.println(storage == atCommand);
 			if (storage != atCommand) {
 				commTarg[c] = commBit[c];
+			}else if (storage == atCommand) {
+				commTarg[c] = "";
 			}
 		}
+		System.out.print(commTarg[0]);
+		System.out.print(commTarg[1]);
+		System.out.println(commTarg[2]);
 		return(commTarg);
 	}
 }
