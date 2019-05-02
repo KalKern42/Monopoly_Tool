@@ -14,7 +14,9 @@ class Main {
 		Player p2 = players.get("Player2");
 		Property prop = properties.get("boardwalk");
 		Property prop2 = properties.get("mediterranean avenue");
-		Property prop3 = properties.get("baltic avenue");
+		Property prop3 = properties.get("water works");
+		Property prop4 = properties.get("electric company");
+
 		
 		p1.giveProperty(prop2);
 		p1.giveProperty(prop3);
@@ -22,6 +24,7 @@ class Main {
 		prop2.houses = 2;
 		prop3.houses = 3;
 		prop3.hotel = true;
+		//p1.giveProperty(prop4);
 		p1.giveProperty(prop);
 
 		//commands.propertyStats(prop);
@@ -31,7 +34,7 @@ class Main {
 		//commands.playersOverview();
 		//commands.propertiesByType("dark blue");
 		//commands.transferMoney("Player1", "Player2", -50);
-		commands.payRent(p2, prop);
+		commands.payRent(p2, prop3);
 	}
 }
 

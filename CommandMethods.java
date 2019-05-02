@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.util.Scanner;
 
 
 public class CommandMethods {
@@ -200,6 +200,21 @@ public class CommandMethods {
 	public void payRent(Player player, Property property) {
 		int rentDue = property.rentPrice();
 		String printOut = ANSI_BOLD + property.name.toUpperCase() + ":" + ANSI_RESET;
+		
+		if (property.utility == true) {
+			Scanner input = new Scanner(System.in);
+			System.out.print("> What did " + player + " roll? ");
+			
+			int ownerUtilities = Misc.findAllOfColor("utility", property.owner.properties).size();
+			int roll = input.nextInt();
+			
+			if (ownerUtilities == 1) {
+				rentDue = 4 * roll;
+			}
+			else if (ownerUtilities == 2) {
+				rentDue = 10 * roll;
+			}
+		}
 		
 		if (rentDue == 0 || property.owner.name == player.name) {
 			System.out.print(printOut + "\033[1;92m No rent due!");
