@@ -224,6 +224,25 @@ public class CommandMethods {
 		printOut += "\033[0;91m $" +  rentDue + " RENT" + ANSI_RESET;
 		System.out.print(printOut + "\n");
 		transferMoney(player, property.owner, rentDue);
-
 	}	
+	
+	public void purchaseProperty(String playerName, String propertyName) {
+		Player player = players.get(playerName);
+		Property property = properties.get(propertyName);
+		purchaseProperty(player, property);
+	}
+	
+	public void purchaseProperty(Player player, Property property) {
+		if (property.owner != null) {
+			System.out.print("\033[0;91m" + property.toString().toUpperCase() + " isn't for sale!");
+		}
+		
+		int propertyPrice = property.price;
+		
+		if (player.cash < propertyPrice) {
+			System.out.print("\033[0;91m" + player.name.toUpperCase() + " has only $" + player.cash + "\nThey need $" + (propertyPrice - player.cash) + " more to purchase " + property.toString().toUpperCase());
+		}
+		
+		Scanner input = new Scanner(System.in); // TODO : prompt user if they want to buy property for its price
+	}
 }

@@ -19,7 +19,7 @@ class Main {
 
 		
 		p1.giveProperty(prop2);
-		p1.giveProperty(prop3);
+		//p1.giveProperty(prop3);
 		prop.houses = 4;
 		prop2.houses = 2;
 		prop3.houses = 3;
@@ -34,7 +34,9 @@ class Main {
 		//commands.playersOverview();
 		//commands.propertiesByType("dark blue");
 		//commands.transferMoney("Player1", "Player2", -50);
-		commands.payRent(p2, prop3);
+		//commands.payRent(p2, prop3);
+		p1.cash = 150;
+		commands.purchaseProperty(p1, prop3);
 	}
 }
 

@@ -168,7 +168,8 @@ public class Misc {
 			if (property.owner != null) {
 				owner = property.owner.toString();
 			}
-						printOut += prefix + icon + "\t" + conditionalTab + property.toString() + "\t" + conditionalTab2 + property.color.toUpperCase() + conditionalTab3 + "\t" + owner + "\n";
+			
+			printOut += prefix + icon + "\t" + conditionalTab + property.toString() + "\t" + conditionalTab2 + property.color.toUpperCase() + conditionalTab3 + "\t" + owner + "\n";
 			
 		}
 		return printOut;
