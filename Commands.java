@@ -58,15 +58,15 @@ elif (usrImpt.contains(command name){
 		
 		for (int c = 0; c < commBit.length; c++){
 			storage = commBit[c];
-			System.out.println(storage == atCommand);
-			if (storage != atCommand) {
-				commTarg[c] = commBit[c];
-			}else if (storage == atCommand) {
+			System.out.println(storage.contains(atCommand));
+			if (storage.contains(atCommand)) {
 				commTarg[c] = "";
+			}else {
+				commTarg[c] = commBit[c];
 			}
 		}
 		System.out.print(commTarg[0]);
-		System.out.print(commTarg[1]);
+		System.out.println(commTarg[1]);
 		System.out.println(commTarg[2]);
 		return(commTarg);
 	}
