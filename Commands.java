@@ -1,9 +1,11 @@
 /*
 Author: Kal Kern
 Date: 3/28/19
-
+edited: 5/6/19
 the structure needed for commands to operate the 
 */
+
+// !!! use the .contains() to compare strings !!!
 
 import java.util.*;
 import javax.xml.bind.attachment.*;
@@ -11,10 +13,10 @@ import javax.xml.bind.attachment.*;
 class Commands {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		int stayIn = 0;
+		int stayIn = 0; //how to exit the loop
 		String usrImpt = ""; //for basic commands and leaving the loop
-		String commTarget = "";
-		String actCommand = "";
+		String commTarget = ""; //this is what the commands will be targeting
+		String actCommand = ""; //this is for taking the commands into other methods
 		String[] comHands = new String[5]; //for the more complex commands requiring more than one target (also sorry for the pun)
 		
 		
@@ -34,14 +36,11 @@ elif (usrImpt.contains(command name){
 }   ~~Reffer to kill as a refference also~~*/
 			if (usrImpt.contains("lmo")) {
 				stayIn = 1;
-			}else if (usrImpt.contains("kill")) {
+			}else if (usrImpt.contains("kill")) { //single command
 				commTarget = commandMod(usrImpt, 4);
-				System.out.println(commTarget + "2");//this line is just a test
 			}else if (usrImpt.contains("trade")) {
 				actCommand = "trade";
-				System.out.println(actCommand + " blep");
 				comHands = commandPlex(comHands, "trade");
-				System.out.println(comHands[1]);
 			}
 		}
 	}
@@ -51,23 +50,20 @@ elif (usrImpt.contains(command name){
 		return(modd);		
 	}
 	public static String[] commandPlex(String[] commBit, String atCommand){
-		
-		// HEP MEH I NEED SOME FIXING DONT FORGET ME
 		String[] commTarg = new String[5];
 		String storage = "";
 		
 		for (int c = 0; c < commBit.length; c++){
-			storage = commBit[c];
-			System.out.println(storage.contains(atCommand));
+			storage = commBit[c]; //for easy comparing
+			
 			if (storage.contains(atCommand)) {
 				commTarg[c] = "";
 			}else {
 				commTarg[c] = commBit[c];
 			}
+			//the command targets are stored and returns but the command is not
 		}
-		System.out.print(commTarg[0]);
-		System.out.println(commTarg[1]);
-		System.out.println(commTarg[2]);
+		
 		return(commTarg);
 	}
 }
