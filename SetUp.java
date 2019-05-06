@@ -62,6 +62,9 @@ public class SetUp {
 				
 			} while (illegalNames.contains(name));
 			illegalNames.add(name);
+			
+			Player newPlayer = new Player(name);
+			Main.players.playerList.add(newPlayer);
 
 		}
 	}
