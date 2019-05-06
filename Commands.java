@@ -18,10 +18,11 @@ class Commands {
 		String commTarget = ""; //this is what the commands will be targeting
 		String actCommand = ""; //this is for taking the commands into other methods
 		String[] comHands = new String[5]; //for the more complex commands requiring more than one target (also sorry for the pun)
+		String[] comlist = { "help" , "kill" , "trade" };
 		
 		
 		System.out.println("Begining Monopoly Commands..... ");
-		System.out.println("(type: 'let me out' to leave)");
+		System.out.println("(type: 'lmo' to leave)");
 				
 		while (stayIn == 0) {
 			System.out.print("Monopoly User: ");
@@ -41,6 +42,19 @@ elif (usrImpt.contains(command name){
 			}else if (usrImpt.contains("trade")) {
 				actCommand = "trade";
 				comHands = commandPlex(comHands, "trade");
+			}else if (usrImpt.contains("help")) {
+				//printing a list of commands
+				for (int r = 0; r < comlist.length; r++) {
+					//output formating too look nice
+					if (r == comlist.length - 1) {
+						System.out.println(comlist[r]);
+					}else {
+						System.out.print(comlist[r] + ", ");
+					}
+				}
+			}
+			else{
+				System.out.println("I sorry that is not a command, if you would like to a list of commands type: help");
 			}
 		}
 	}
