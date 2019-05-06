@@ -274,7 +274,7 @@ public class CommandMethods {
 		System.out.println(property.name.toUpperCase() + " :\033[0;91m $" + propertyPrice + ANSI_RESET);
 		System.out.println(player.name.toUpperCase() + " :\033[1;92m $" + player.cash + ANSI_RESET);
 		
-		System.out.print("Purchase " + property.name.toUpperCase() + " for $" + propertyPrice + "? (y/n) ");
+		System.out.print(property.owner.name.toUpperCase() + ", purchase " + property.name.toUpperCase() + " for $" + propertyPrice + "? (y/n) ");
 		Scanner input = new Scanner(System.in);
 		
 		String response = "";		
@@ -315,7 +315,7 @@ public class CommandMethods {
 			return;
 		}
 				
-		System.out.print("Mortgage " + property.name.toUpperCase() + " in exchange for\033[1;92m $" + property.mortgage + "?" + ANSI_RESET + " (y/n) ");
+		System.out.print(property.owner.name.toUpperCase() + ", mortgage " + property.name.toUpperCase() + " in exchange for\033[1;92m $" + property.mortgage + "?" + ANSI_RESET + " (y/n) ");
 		
 		Scanner input = new Scanner(System.in);
 		String response = "";
@@ -347,7 +347,7 @@ public class CommandMethods {
 	
 	public void unmortgageProperty(Property property) {
 		
-		int unmortgagePrice = (int)Math.round(property.mortgage * 1.1);
+		int unmortgagePrice = (int)Math.ceil(property.mortgage * 1.1);
 		
 		if (property.owner == null) {
 			System.out.print("\u001B[31m" + property.name.toUpperCase() + " doesn't even have an owner!");
@@ -365,7 +365,7 @@ public class CommandMethods {
 		}
 		
 		
-		System.out.print("Unmortgage " + property.name.toUpperCase() + " for\033[0;91m $" + unmortgagePrice + "?" + ANSI_RESET + " (y/n) ");
+		System.out.print(property.owner.name.toUpperCase() + ", unmortgage " + property.name.toUpperCase() + " for\033[0;91m $" + unmortgagePrice + "?" + ANSI_RESET + " (y/n) ");
 		
 		Scanner input = new Scanner(System.in);
 		String response = "";
@@ -384,9 +384,228 @@ public class CommandMethods {
 				break;
 			}
 		}
-		
 	}
 	
+	public void purchaseHouses(String propertyName, int houses) {
+		Property property = properties.get(propertyName);	
+		if (property == null) {
+			return;
+		}
+		purchaseHouses(property, houses);
+	}
+	
+	public void purchaseHouses(Property property, int houses) {
+		
+		if (property.owner == null) {
+			System.out.print("\033[0;91m" + "This property has no owner!" + ANSI_RESET);
+			return;
+		}
+		if (property.mortgaged == true) {
+			System.out.print("\033[0;91m" + "You can't purchase houses for mortgaged properties!" + ANSI_RESET);
+			return;
+		}
+		if (houses < 0) {
+			System.out.print("\033[0;91m" + "Can't purchase negative houses!");
+			return;
+		}
+		if (property.houses + houses > 4) {
+			System.out.print("\033[0;91m" + "A property can only have up to 4 houses!" + ANSI_RESET);
+			return;
+		}
+		if (property.utility || property.railroad) {
+			System.out.print("\033[0;91m" + "Railroads and utilities can't have houses!" + ANSI_RESET);
+			return;
+		}
+
+		
+		int price = property.housePrice * houses;
+		
+		if (property.owner.cash < price) {
+			System.out.print("\033[0;91m" + "You need $" + (price - property.owner.cash) + " more to make this transaction." + ANSI_RESET);
+			return;
+		}
+		
+		
+		System.out.print(property.owner.name.toUpperCase() + ", purchase " + houses + " houses on " + property.name.toUpperCase() + " for\033[0;91m $" + price + "?" + ANSI_RESET + " (y/n) ");
+		
+		Scanner input = new Scanner(System.in);
+		String response = "";		
+		
+		while (true) {
+			response = input.nextLine().toLowerCase();
+			if (response.equals("y")) {
+				System.out.print("\t");
+				incrementMoney(property.owner, -price);
+				property.houses += houses;
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property));
+				break;
+			}
+			if (response.equals("n")) {
+				break;
+			}
+		}
+	}
+	
+	public void sellHouses(String propertyName, int houses) {
+		Property property = properties.get(propertyName);	
+		if (property == null) {
+			return;
+		}
+		sellHouses(property, houses);
+	}
+	
+	public void sellHouses(Property property, int houses) {
+		
+		if (property.owner == null) {
+			System.out.print("\033[0;91m" + "This property has no owner!" + ANSI_RESET);
+			return;
+		}
+		if (houses < 0) {
+			System.out.print("\033[0;91m" + "Can't sell negative houses!");
+			return;
+		}
+		if (property.mortgaged == true) {
+			System.out.print("\033[0;91m" + "Mortgaged properties don't have houses!" + ANSI_RESET);
+			return;
+		}
+		if (property.hotel == true) {
+			System.out.print("\033[0;91m" + "Hotel must be sold first!" + ANSI_RESET);
+			return;
+		}
+		if (property.houses - houses < 0) {
+			System.out.print("\033[0;91m" + "Attempt to sell more houses than owned!" + ANSI_RESET);
+			return;
+		}
+		if (property.utility || property.railroad) {
+			System.out.print("\033[0;91m" + "Railroads and utilities don't have houses!" + ANSI_RESET);
+			return;
+		}
+			
+			
+		int gain = (int)Math.ceil(property.housePrice * houses * 0.5);
+		
+		System.out.print(property.owner.name.toUpperCase() + ", sell " + houses + " houses on " + property.name.toUpperCase() + " for\033[1;92m $" + gain + "?" + ANSI_RESET + " (y/n) ");
+		
+		Scanner input = new Scanner(System.in);
+		String response = "";		
+			
+		while (true) {
+			response = input.nextLine().toLowerCase();
+			if (response.equals("y")) {
+				System.out.print("\t");
+				incrementMoney(property.owner, gain);
+				property.houses -= houses;
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property));
+				break;
+			}
+			if (response.equals("n")) {
+				break;
+			}
+		}
+	}
+	
+	
+	public void purchaseHotel(String propertyName) {
+		Property property = properties.get(propertyName);	
+		if (property == null) {
+			return;
+		}
+		purchaseHotel(property);
+	}
+	
+	public void purchaseHotel(Property property) {
+		
+		if (property.owner == null) {
+			System.out.print("\033[0;91m" + "This property has no owner!" + ANSI_RESET);
+			return;
+		}
+		if (property.mortgaged == true) {
+			System.out.print("\033[0;91m" + "Can't purchase hotels for mortgaged properties!" + ANSI_RESET);
+			return;
+		}
+		if (property.houses != 4) {
+			System.out.print("\033[0;91m" + "Must have 4 houses before upgrading to a hotel!");
+			return;
+		}
+		if (property.utility || property.railroad) {
+			System.out.print("\033[0;91m" + "Railroads and utilities can't have hotels!" + ANSI_RESET);
+			return;
+		}
+		
+		int price = property.houseRent[4];
+		
+		if (property.owner.cash < price) {
+			System.out.print("\033[0;91m" + "You need $" + (price - property.owner.cash) + " more to make this transaction." + ANSI_RESET);
+			return;
+		}
+		
+		
+		System.out.print(property.owner.name.toUpperCase() + ", purchase a hotel on " + property.name.toUpperCase() + " for\033[0;91m $" + price + "?" + ANSI_RESET + " (y/n) ");
+		
+		Scanner input = new Scanner(System.in);
+		String response = "";		
+		
+		while (true) {
+			response = input.nextLine().toLowerCase();
+			if (response.equals("y")) {
+				System.out.print("\t");
+				incrementMoney(property.owner, -price);
+				property.hotel = true;
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property));
+				break;
+			}
+			if (response.equals("n")) {
+				break;
+			}
+		}
+	}
+
+	public void sellHotel(String propertyName) {
+			Property property = properties.get(propertyName);	
+			if (property == null) {
+				return;
+			}
+			sellHotel(property);
+		}
+		
+	public void sellHotel(Property property) {
+		
+		if (property.owner == null) {
+			System.out.print("\033[0;91m" + "This property has no owner!" + ANSI_RESET);
+			return;
+		}
+		if (property.mortgaged == true) {
+			System.out.print("\033[0;91m" + "Mortgaged properties don't have hotels!" + ANSI_RESET);
+			return;
+		}
+		if (property.utility || property.railroad) {
+			System.out.print("\033[0;91m" + "Railroads and utilities don't have hotels!" + ANSI_RESET);
+			return;
+		}
+		
+		int gain = (int)Math.ceil(property.houseRent[4] * 0.5);		
+		
+		System.out.print(property.owner.name.toUpperCase() + ", sell a hotel on " + property.name.toUpperCase() + " for\033[1;92m $" + gain + "?" + ANSI_RESET + " (y/n) ");
+		
+		Scanner input = new Scanner(System.in);
+		String response = "";		
+		
+		while (true) {
+			response = input.nextLine().toLowerCase();
+			if (response.equals("y")) {
+				System.out.print("\t");
+				incrementMoney(property.owner, gain);
+				property.hotel = false;
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property));
+				break;
+			}
+			if (response.equals("n")) {
+				break;
+			}
+		}
+	}
+
+
 }
 
 
