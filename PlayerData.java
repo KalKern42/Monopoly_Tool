@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class PlayerData {
 	public ArrayList<Player> playerList = new ArrayList<Player>();
 	
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_RED = "\u001B[31m";
 	
 	public Player get(String name) {
 		for (Player player : playerList) {
@@ -12,6 +14,7 @@ public class PlayerData {
 				return player;
 			}
 		}
+		System.out.println(ANSI_RED + "Player " + name.toUpperCase() + " not found!" + ANSI_RESET);
 		return null;
 	}
 	

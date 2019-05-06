@@ -20,13 +20,13 @@ class Main {
 		
 		p1.giveProperty(prop2);
 		//p1.giveProperty(prop3);
-		prop.houses = 4;
+		prop.mortgaged = true;
 		prop2.houses = 2;
-		prop3.houses = 3;
-		prop3.hotel = true;
+		//prop3.houses = 3;
+		//prop3.hotel = true;
 		//p1.giveProperty(prop4);
 		p1.giveProperty(prop);
-
+		p1.giveProperty(prop3);
 		//commands.propertyStats(prop);
 		//commands.playerStats(p1);
 		//commands.playerProperties(p1);
@@ -36,7 +36,8 @@ class Main {
 		//commands.transferMoney("Player1", "Player2", -50);
 		//commands.payRent(p2, prop3);
 		p1.cash = 150;
-		commands.purchaseProperty(p1, prop3);
+		//commands.purchaseProperty(p1, prop3);
+		commands.unmortgageProperty("boardwalk");
 	}
 }
 

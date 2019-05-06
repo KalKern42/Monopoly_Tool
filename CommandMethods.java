@@ -11,6 +11,10 @@ public class CommandMethods {
 
 	public void propertyStats(String propertyName) {
 		Property property = properties.get(propertyName);
+		
+		if (property == null) {
+			return;
+		}
 		propertyStats(property);
 	}
 
@@ -34,6 +38,9 @@ public class CommandMethods {
 	
 	public void playerStats(String playerName) {
 		Player player = players.get(playerName);
+		if (player == null) {
+			return;
+		}
 		playerStats(player);
 	}
 	
@@ -51,6 +58,9 @@ public class CommandMethods {
 	
 	public void playerProperties(String playerName) {
 		Player player = players.get(playerName);
+		if (player == null) {
+			return;
+		}
 		playerProperties(player);
 	}
 	
@@ -134,6 +144,9 @@ public class CommandMethods {
 	
 	public void incrementMoney(String playerName, int delta) {
 		Player player = players.get(playerName);
+		if (player == null) {
+			return;
+		}
 		incrementMoney(player, delta);
 	}
 	
@@ -170,6 +183,9 @@ public class CommandMethods {
 	public void transferMoney(String fromName, String toName, int delta) {
 		Player from = players.get(fromName);
 		Player to = players.get(toName);
+		if (from == null || to == null) {
+			return;
+		}
 		transferMoney(from, to, delta);
 	}
 	
@@ -194,6 +210,11 @@ public class CommandMethods {
 	public void payRent(String playerName, String propertyName) {
 		Player player = players.get(playerName);
 		Property property = properties.get(propertyName);
+		
+		if (player == null || property == null) {
+			return;
+		}
+		
 		payRent(player, property);
 	}
 	
@@ -229,20 +250,134 @@ public class CommandMethods {
 	public void purchaseProperty(String playerName, String propertyName) {
 		Player player = players.get(playerName);
 		Property property = properties.get(propertyName);
+		
+		if (player == null || property == null) {
+			return;
+		}
+		
 		purchaseProperty(player, property);
 	}
 	
 	public void purchaseProperty(Player player, Property property) {
 		if (property.owner != null) {
 			System.out.print("\033[0;91m" + property.toString().toUpperCase() + " isn't for sale!");
+			return;
 		}
 		
 		int propertyPrice = property.price;
 		
 		if (player.cash < propertyPrice) {
 			System.out.print("\033[0;91m" + player.name.toUpperCase() + " has only $" + player.cash + "\nThey need $" + (propertyPrice - player.cash) + " more to purchase " + property.toString().toUpperCase());
+			return;
 		}
 		
-		Scanner input = new Scanner(System.in); // TODO : prompt user if they want to buy property for its price
+		System.out.println(property.name.toUpperCase() + " :\033[0;91m $" + propertyPrice + ANSI_RESET);
+		System.out.println(player.name.toUpperCase() + " :\033[1;92m $" + player.cash + ANSI_RESET);
+		
+		System.out.print("Purchase " + property.name.toUpperCase() + " for $" + propertyPrice + "? (y/n) ");
+		Scanner input = new Scanner(System.in);
+		
+		String response = "";		
+		while (true) {
+			response = input.nextLine().toLowerCase();
+			
+			if (response.equals("y")) {
+				System.out.print("\t");
+				incrementMoney(player, -propertyPrice);
+				System.out.print("\t\033[1;92m+" + property.name.toUpperCase() + "\n");
+				player.giveProperty(property);
+				break;
+			}
+			else if (response.equals("n")) {
+				break;
+			}
+		}
 	}
+	
+	public void mortgageProperty(String propertyName) {
+		Property property = properties.get(propertyName);
+		
+		if (property == null) {
+			return;
+		}
+		mortgageProperty(property);
+	}
+	
+	public void mortgageProperty(Property property) {
+		
+		if (property.hotel || property.houses != 0) {
+			System.out.print("\u001B[31m"+"Must sell all houses/hotels before mortgaging a property!");
+			return;
+		}
+		
+		if (property.owner == null) {
+			System.out.print("\u001B[31m" + property.name.toUpperCase() + " doesn't even have an owner!");
+			return;
+		}
+				
+		System.out.print("Mortgage " + property.name.toUpperCase() + " in exchange for\033[1;92m $" + property.mortgage + "?" + ANSI_RESET + " (y/n) ");
+		
+		Scanner input = new Scanner(System.in);
+		String response = "";
+		
+		while (true) {
+			response = input.nextLine().toLowerCase();
+			
+			if (response.equals("y")) {
+				System.out.print("\t");
+				incrementMoney(property.owner, property.mortgage);
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t\u001B[31m MORTGAGED" + ANSI_RESET);
+				property.mortgaged = true;
+				break;
+			}
+			if (response.equals("n")) {
+				break;
+			}
+		}
+	}
+	
+	public void unmortgageProperty(String propertyName) {
+		Property property = properties.get(propertyName);
+		
+		if (property == null) {
+			return;
+		}
+		unmortgageProperty(property);
+	}
+	
+	public void unmortgageProperty(Property property) {
+		if (property.owner == null) {
+			System.out.print("\u001B[31m" + property.name.toUpperCase() + " doesn't even have an owner!");
+			return;
+		}
+		
+		if (!property.mortgaged) {
+			System.out.print("\u001B[31m" + property.name.toUpperCase() + " isn't even mortgaged!");
+			return;
+		}
+		
+		int unmortgagePrice = (int)Math.round(property.mortgage * 1.1);
+		
+		System.out.print("Unmortgage " + property.name.toUpperCase() + " for\033[0;91m $" + unmortgagePrice + "?" + ANSI_RESET + " (y/n) ");
+		
+		Scanner input = new Scanner(System.in);
+		String response = "";
+		
+		while (true) {
+			response = input.nextLine().toLowerCase();
+			
+			if (response.equals("y")) {
+				System.out.print("\t");
+				incrementMoney(property.owner, -unmortgagePrice);
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t\033[1;92m UNMORTGAGED" + ANSI_RESET);
+				property.mortgaged = false;
+				break;
+			}
+			if (response.equals("n")) {
+				break;
+			}
+		}
+		
+	}
+	
 }

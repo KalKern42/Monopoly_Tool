@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class PropertyData {
 	public ArrayList<Property> propertyList = new ArrayList<Property>();
 	
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_RED = "\u001B[31m";
 
 	public Property get(String name) {		
 		for (Property property : propertyList) {
@@ -12,6 +14,7 @@ public class PropertyData {
 				return property;
 			}
 		}
+		System.out.println(ANSI_RED + "Property " + name.toUpperCase() + " not found!" + ANSI_RESET);
 		return null;
 	}
 	
