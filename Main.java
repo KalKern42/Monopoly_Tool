@@ -35,7 +35,7 @@ class Main {
 		//commands.propertiesByType("dark blue");
 		//commands.transferMoney("Player1", "Player2", -50);
 		//commands.payRent(p2, prop3);
-		p1.cash = 150;
+		p1.cash = 550;
 		//commands.purchaseProperty(p1, prop3);
 		commands.unmortgageProperty("boardwalk");
 	}

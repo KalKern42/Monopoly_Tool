@@ -346,8 +346,16 @@ public class CommandMethods {
 	}
 	
 	public void unmortgageProperty(Property property) {
+		
+		int unmortgagePrice = (int)Math.round(property.mortgage * 1.1);
+		
 		if (property.owner == null) {
 			System.out.print("\u001B[31m" + property.name.toUpperCase() + " doesn't even have an owner!");
+			return;
+		}
+		
+		if (property.owner.cash < unmortgagePrice) {
+			System.out.print("\033[0;91m" + property.owner.name.toUpperCase() + " has only $" + property.owner.cash + "\nThey need $" + (unmortgagePrice - property.owner.cash) + " more to unmortgage " + property.toString().toUpperCase());
 			return;
 		}
 		
@@ -356,7 +364,6 @@ public class CommandMethods {
 			return;
 		}
 		
-		int unmortgagePrice = (int)Math.round(property.mortgage * 1.1);
 		
 		System.out.print("Unmortgage " + property.name.toUpperCase() + " for\033[0;91m $" + unmortgagePrice + "?" + ANSI_RESET + " (y/n) ");
 		
@@ -381,3 +388,7 @@ public class CommandMethods {
 	}
 	
 }
+
+
+// TODO: buy and sell houses/hotels
+// TODO: sell properties
