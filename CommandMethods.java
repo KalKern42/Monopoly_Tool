@@ -260,14 +260,14 @@ public class CommandMethods {
 	
 	public void purchaseProperty(Player player, Property property) {
 		if (property.owner != null) {
-			System.out.print("\033[0;91m" + property.toString().toUpperCase() + " isn't for sale!");
+			System.out.print("\033[0;91m" + property.toString().toUpperCase() + " isn't for sale!" + ANSI_RESET);
 			return;
 		}
 		
 		int propertyPrice = property.price;
 		
 		if (player.cash < propertyPrice) {
-			System.out.print("\033[0;91m" + player.name.toUpperCase() + " has only $" + player.cash + "\nThey need $" + (propertyPrice - player.cash) + " more to purchase " + property.toString().toUpperCase());
+			System.out.print("\033[0;91m" + player.name.toUpperCase() + " has only $" + player.cash + "\nThey need $" + (propertyPrice - player.cash) + " more to purchase " + property.toString().toUpperCase()+ ANSI_RESET);
 			return;
 		}
 		
@@ -305,13 +305,26 @@ public class CommandMethods {
 	
 	public void mortgageProperty(Property property) {
 		
-		if (property.hotel || property.houses != 0) {
-			System.out.print("\u001B[31m"+"Must sell all houses/hotels before mortgaging a property!");
+		float housesPerProperty = 0;
+		boolean anyHotels = false;
+		
+		ArrayList<Property> propertiesOfColor = Misc.findAllOfColor(property.color, property.owner.properties);
+		ArrayList<Property> allOfColor = Misc.findAllOfColor(property.color, Data.properties.propertyList);
+		
+		for (Property p : propertiesOfColor) {
+			housesPerProperty += (p.houses / allOfColor.size());
+			if (p.hotel == true) {
+				anyHotels = true;
+			}
+		}
+		
+		if (housesPerProperty != 0 || anyHotels == true) {
+			System.out.print("\033[0;91m"+"Must sell all houses/hotels before mortgaging a property!\n"+ ANSI_RESET);
 			return;
 		}
 		
 		if (property.owner == null) {
-			System.out.print("\u001B[31m" + property.name.toUpperCase() + " doesn't even have an owner!");
+			System.out.print("\033[0;91m" + property.name.toUpperCase() + " doesn't even have an owner!\n"+ ANSI_RESET);
 			return;
 		}
 				
@@ -326,11 +339,12 @@ public class CommandMethods {
 			if (response.equals("y")) {
 				System.out.print("\t");
 				incrementMoney(property.owner, property.mortgage);
-				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t\u001B[31m MORTGAGED" + ANSI_RESET);
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t\u001B[31m MORTGAGED\n" + ANSI_RESET);
 				property.mortgaged = true;
 				break;
 			}
 			if (response.equals("n")) {
+				System.out.println("");
 				break;
 			}
 		}
@@ -350,22 +364,22 @@ public class CommandMethods {
 		int unmortgagePrice = (int)Math.ceil(property.mortgage * 1.1);
 		
 		if (property.owner == null) {
-			System.out.print("\u001B[31m" + property.name.toUpperCase() + " doesn't even have an owner!");
+			System.out.print("\033[0;91m" + property.name.toUpperCase() + " doesn't even have an owner!\n"+ ANSI_RESET);
 			return;
 		}
 		
 		if (property.owner.cash < unmortgagePrice) {
-			System.out.print("\033[0;91m" + property.owner.name.toUpperCase() + " has only $" + property.owner.cash + "\nThey need $" + (unmortgagePrice - property.owner.cash) + " more to unmortgage " + property.toString().toUpperCase());
+			System.out.print("\033[0;91m" + property.owner.name.toUpperCase() + " has only $" + property.owner.cash + "\nThey need $" + (unmortgagePrice - property.owner.cash) + " more to unmortgage " + property.toString().toUpperCase()+ "\n" + ANSI_RESET);
 			return;
 		}
 		
 		if (!property.mortgaged) {
-			System.out.print("\u001B[31m" + property.name.toUpperCase() + " isn't even mortgaged!");
+			System.out.print("\033[0;91m" + property.name.toUpperCase() + " isn't even mortgaged!\n"+ ANSI_RESET);
 			return;
 		}
 		
 		
-		System.out.print(property.owner.name.toUpperCase() + ", unmortgage " + property.name.toUpperCase() + " for\033[0;91m $" + unmortgagePrice + "?" + ANSI_RESET + " (y/n) ");
+		System.out.print(property.owner.name.toUpperCase() + ", unmortgage " + property.name.toUpperCase() + " for\033[0;91m $" + unmortgagePrice + "?" + ANSI_RESET + " (y/n) "+ ANSI_RESET);
 		
 		Scanner input = new Scanner(System.in);
 		String response = "";
@@ -381,6 +395,7 @@ public class CommandMethods {
 				break;
 			}
 			if (response.equals("n")) {
+				System.out.println("");
 				break;
 			}
 		}
@@ -397,15 +412,16 @@ public class CommandMethods {
 	public void purchaseHouses(Property property, int houses) {
 		
 		if (property.owner == null) {
-			System.out.print("\033[0;91m" + "This property has no owner!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "This property has no owner!\n" + ANSI_RESET);
 			return;
 		}
 		if (property.mortgaged == true) {
-			System.out.print("\033[0;91m" + "You can't purchase houses for mortgaged properties!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "You can't purchase houses for mortgaged properties!\n" + ANSI_RESET);
 			return;
 		}
+		
 		if (houses < 0) {
-			System.out.print("\033[0;91m" + "Can't purchase negative houses!");
+			System.out.print("\033[0;91m" + "Can't purchase negative houses!\n"+ ANSI_RESET);
 			return;
 		}
 		if (property.houses + houses > 4) {
@@ -413,15 +429,29 @@ public class CommandMethods {
 			return;
 		}
 		if (property.utility || property.railroad) {
-			System.out.print("\033[0;91m" + "Railroads and utilities can't have houses!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "Railroads and utilities can't have houses!\n" + ANSI_RESET);
 			return;
+		}
+		
+		float owned = 0;
+		
+		ArrayList<Property> propertiesOfColor = Misc.findAllOfColor(property.color, property.owner.properties);
+		ArrayList<Property> allOfColor = Misc.findAllOfColor(property.color, Data.properties.propertyList);
+		
+		for (Property p : propertiesOfColor) {
+			owned++;
+		}
+		
+		if (owned != allOfColor.size()) {
+			System.out.print("\033[0;91m" + "Must own all properties from " + property.color.toUpperCase() + " color set before purchasing houses!\n" + ANSI_RESET);
+		return;
 		}
 
 		
 		int price = property.housePrice * houses;
 		
 		if (property.owner.cash < price) {
-			System.out.print("\033[0;91m" + "You need $" + (price - property.owner.cash) + " more to make this transaction." + ANSI_RESET);
+			System.out.print("\033[0;91m" + "You need $" + (price - property.owner.cash) + " more to make this transaction.\n" + ANSI_RESET);
 			return;
 		}
 		
@@ -437,7 +467,7 @@ public class CommandMethods {
 				System.out.print("\t");
 				incrementMoney(property.owner, -price);
 				property.houses += houses;
-				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property));
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property) + "\n");
 				break;
 			}
 			if (response.equals("n")) {
@@ -457,27 +487,28 @@ public class CommandMethods {
 	public void sellHouses(Property property, int houses) {
 		
 		if (property.owner == null) {
-			System.out.print("\033[0;91m" + "This property has no owner!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "This property has no owner!\n" + ANSI_RESET);
 			return;
 		}
+		
 		if (houses < 0) {
-			System.out.print("\033[0;91m" + "Can't sell negative houses!");
+			System.out.print("\033[0;91m" + "Can't sell negative houses!\n"+ ANSI_RESET);
 			return;
 		}
 		if (property.mortgaged == true) {
-			System.out.print("\033[0;91m" + "Mortgaged properties don't have houses!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "Mortgaged properties don't have houses!\n" + ANSI_RESET);
 			return;
 		}
 		if (property.hotel == true) {
-			System.out.print("\033[0;91m" + "Hotel must be sold first!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "Hotel must be sold first!\n" + ANSI_RESET);
 			return;
 		}
 		if (property.houses - houses < 0) {
-			System.out.print("\033[0;91m" + "Attempt to sell more houses than owned!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "Attempt to sell more houses than owned!\n" + ANSI_RESET);
 			return;
 		}
 		if (property.utility || property.railroad) {
-			System.out.print("\033[0;91m" + "Railroads and utilities don't have houses!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "Railroads and utilities don't have houses!\n" + ANSI_RESET);
 			return;
 		}
 			
@@ -495,10 +526,11 @@ public class CommandMethods {
 				System.out.print("\t");
 				incrementMoney(property.owner, gain);
 				property.houses -= houses;
-				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property));
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property) + "\n" + ANSI_RESET);
 				break;
 			}
 			if (response.equals("n")) {
+				System.out.println("");
 				break;
 			}
 		}
@@ -516,26 +548,44 @@ public class CommandMethods {
 	public void purchaseHotel(Property property) {
 		
 		if (property.owner == null) {
-			System.out.print("\033[0;91m" + "This property has no owner!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "This property has no owner!\n" + ANSI_RESET);
 			return;
 		}
-		if (property.mortgaged == true) {
-			System.out.print("\033[0;91m" + "Can't purchase hotels for mortgaged properties!" + ANSI_RESET);
+		
+		float housesPerProperty = 0;
+		boolean anyMortgagedProperties = false;
+		int owned = 0;
+		
+		ArrayList<Property> propertiesOfColor = Misc.findAllOfColor(property.color, property.owner.properties);
+		ArrayList<Property> allOfColor = Misc.findAllOfColor(property.color, Data.properties.propertyList);
+		
+		for (Property p : propertiesOfColor) {
+			housesPerProperty += (p.houses / allOfColor.size());
+			if (p.mortgaged == true) {
+				anyMortgagedProperties = true;
+			}
+		}
+
+		if (housesPerProperty != 4) {
+			System.out.print("\033[0;91m" + "Must have 4 houses per property on " + property.color.toUpperCase() + " color group before upgrading to a hotel!\n"+ ANSI_RESET);
 			return;
 		}
-		if (property.houses != 4) {
-			System.out.print("\033[0;91m" + "Must have 4 houses before upgrading to a hotel!");
+		
+		if (anyMortgagedProperties == true) {
+			System.out.print("\033[0;91m" + "Can't purchase hotels for properties from color sets with mortgaged properties!\n" + ANSI_RESET);
 			return;
 		}
+		
+		
 		if (property.utility || property.railroad) {
-			System.out.print("\033[0;91m" + "Railroads and utilities can't have hotels!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "Railroads and utilities can't have hotels!\n" + ANSI_RESET);
 			return;
 		}
 		
 		int price = property.houseRent[4];
 		
 		if (property.owner.cash < price) {
-			System.out.print("\033[0;91m" + "You need $" + (price - property.owner.cash) + " more to make this transaction." + ANSI_RESET);
+			System.out.print("\033[0;91m" + "You need $" + (price - property.owner.cash) + " more to make this transaction.\n" + ANSI_RESET);
 			return;
 		}
 		
@@ -551,10 +601,11 @@ public class CommandMethods {
 				System.out.print("\t");
 				incrementMoney(property.owner, -price);
 				property.hotel = true;
-				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property));
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property) + "\n");
 				break;
 			}
 			if (response.equals("n")) {
+				System.out.println("");
 				break;
 			}
 		}
@@ -571,15 +622,15 @@ public class CommandMethods {
 	public void sellHotel(Property property) {
 		
 		if (property.owner == null) {
-			System.out.print("\033[0;91m" + "This property has no owner!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "This property has no owner!\n" + ANSI_RESET);
 			return;
 		}
 		if (property.mortgaged == true) {
-			System.out.print("\033[0;91m" + "Mortgaged properties don't have hotels!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "Mortgaged properties don't have hotels!\n" + ANSI_RESET);
 			return;
 		}
 		if (property.utility || property.railroad) {
-			System.out.print("\033[0;91m" + "Railroads and utilities don't have hotels!" + ANSI_RESET);
+			System.out.print("\033[0;91m" + "Railroads and utilities don't have hotels!\n" + ANSI_RESET);
 			return;
 		}
 		
@@ -596,10 +647,11 @@ public class CommandMethods {
 				System.out.print("\t");
 				incrementMoney(property.owner, gain);
 				property.hotel = false;
-				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property));
+				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property) + "\n");
 				break;
 			}
 			if (response.equals("n")) {
+				System.out.println("");
 				break;
 			}
 		}
@@ -608,6 +660,4 @@ public class CommandMethods {
 
 }
 
-
-// TODO: buy and sell houses/hotels
 // TODO: sell properties

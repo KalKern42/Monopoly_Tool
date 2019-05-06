@@ -14,7 +14,7 @@ class Main {
 		Player p2 = players.get("Player2");
 		Property prop = properties.get("boardwalk");
 		Property prop2 = properties.get("mediterranean avenue");
-		Property prop3 = properties.get("water works");
+		Property prop3 = properties.get("park place");
 		Property prop4 = properties.get("electric company");
 
 		
@@ -22,8 +22,10 @@ class Main {
 		//p1.giveProperty(prop3);
 		//prop.mortgaged = true;
 		prop2.houses = 2;
-		prop.houses = 4;
-		prop.hotel = true;
+		prop.houses = 2;
+		prop3.houses = 4;
+		//prop3.mortgaged = true;
+		//prop.hotel = true;
 		//prop3.houses = 3;
 		//prop3.hotel = true;
 		//p1.giveProperty(prop4);
@@ -39,7 +41,11 @@ class Main {
 		//commands.payRent(p2, prop3);
 		p1.cash = 2350;
 		//commands.purchaseProperty(p1, prop3);
-		commands.sellHotel("boardwalk");
+		commands.mortgageProperty("boardwalk");
+		commands.sellHouses("boardwalk", 2);
+		commands.mortgageProperty("boardwalk");
+		commands.sellHouses("park place", 4);
+		commands.mortgageProperty("boardwalk");
 	}
 }
 
