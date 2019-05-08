@@ -40,11 +40,10 @@ import java.awt.Color;
 		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + "THE BOARD SPACES");
 		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + " PROPERTIES");
 		System.out.println(BLACK + WHITE_BACKGROUND + "\tWhen you land on an unowned Street, Railroad or Utility, you must buy it or auction it. ");
-		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + " Want to buy it?" + BLACK + WHITE_BACKGROUND + "\n\tPay the price on the board space " + PURPLE_BACKGROUND + "by typing the name of the player \n\tand the name of the property into this program and the property will be yours.");
+		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + " Want to buy it?" + BLACK + WHITE_BACKGROUND + "\n\tPay the price on the board space by typing the name of the player \n\tthe word \"buy\" and the name of the property into this program and the property will be yours.");
 		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + " Don't want to buy it?" + BLACK + WHITE_BACKGROUND + "\n\tThe Banker must auction it. Bidding starts at $10, and anyone can increase the bid by as little as $1.\n\tYou don't need to gollow turn order, and the banker ends the austion when no player is willing to increase the bid. \n\tThe highest bidder pays the Bank. If no one wants to bid on the property, that's fine. No one pays anything, and the \n\tTittle Deed stays in the bank. ");
 		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + " Collect color sets");
-			//System.out.println("brown\t" + BLUE_BACKGROUND_BRIGHT + "\t" + PURPLE_BACKGROUND + "\t" + RED_BACKGROUND_BRIGHT + "\t" + RED_BACKGROUND + "\t" + YELLOW_BACKGROUND + "\t" + GREEN_BACKGROUND + "\t" + BLUE_BACKGROUND + "\t" + WHITE_BACKGROUND);
-		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + "\tWhen you own each color set:" + BLACK + WHITE_BACKGROUND + "\n\t\tYou can double the rent for those Streets\n\t\tYou can build Houses and Hotels and charge even more rent!");
+					System.out.println(BLACK_BOLD + WHITE_BACKGROUND + "\tWhen you own each color set:" + BLACK + WHITE_BACKGROUND + "\n\t\tYou can double the rent for those Streets\n\t\tYou can build Houses and Hotels and charge even more rent!");
 		System.out.println(BLACK_BOLD + WHITE_BACKGROUND + " Owned Properties");
 		System.out.println(BLACK + WHITE_BACKGROUND + "\tWhen you land on a property that someone elser owns, the owner must ask for rent. If they do, you must pay. if they don't ask before the next player rolls the dice, you don't have to pay. ");
 			
