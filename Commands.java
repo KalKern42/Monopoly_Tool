@@ -39,9 +39,11 @@ elif (usrImpt.contains(command name){
 				stayIn = 1;
 			}else if (usrImpt.contains("kill")) { //single command
 				commTarget = commandMod(usrImpt, 4);
+				
 			}else if (usrImpt.contains("trade")) {
 				actCommand = "trade";
 				comHands = commandPlex(comHands, "trade");
+				
 			}else if (usrImpt.contains("help")) {
 				//printing a list of commands
 				for (int r = 0; r < comlist.length; r++) {
