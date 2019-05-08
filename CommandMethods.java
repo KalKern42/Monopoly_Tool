@@ -8,7 +8,8 @@ public class CommandMethods {
 	final String ANSI_RESET = "\u001B[0m";
 	final String ANSI_BOLD = "\033[1;99m";
 	final String ANSI_UNDERLINE = "\033[4;39m";
-
+	final String ANSI_LIGHT_GREEN = "\033[1;92m";
+	final String ANSI_LIGHT_RED = "\033[0;91m";
 	public void propertyStats(String propertyName) {
 		Property property = properties.get(propertyName);
 		
@@ -657,6 +658,49 @@ public class CommandMethods {
 		}
 	}
 
+	public void givePropertyToPlayer(String propertyName, String playerName) {
+		Property property = properties.get(propertyName);
+		Player player = players.get(playerName);
+
+		if (player == null || property == null) {
+			return;
+		}
+		
+		givePropertyToPlayer(property, player);
+	}
+	
+	
+	public void givePropertyToPlayer(Property property, Player player) {
+		String upperName = property.name.toUpperCase();
+		if (property.owner != null) {
+			System.out.print(upperName + " already belongs to " + property.owner.name.toUpperCase() + ". Give to " + player.name.toUpperCase() + ", free of charge? (y/n) ");
+		}
+		else {
+			System.out.print("Give " + upperName + " to " + player.name.toUpperCase() + ", free of charge? (y/n) ");
+		}
+		
+		Scanner input = new Scanner(System.in);
+		String response = "";
+		
+		while (true) {
+			response = input.nextLine().toLowerCase();
+			
+			if (response.equals("y")) {
+				System.out.print("\t");
+				if (property.owner != null) {
+					property.owner.removeProperty(upperName);
+					System.out.print(property.owner.name.toUpperCase() + ANSI_LIGHT_RED + " -" + upperName + "\n" + ANSI_RESET);
+				}
+				player.giveProperty(property);
+				System.out.print("\t" + player.name.toUpperCase() + ANSI_LIGHT_GREEN + " +" + upperName + "\n" + ANSI_RESET);
+				break;
+			}
+			if (response.equals("n")) {
+				System.out.println("");
+				break;
+			}
+		}
+	}
 
 }
 

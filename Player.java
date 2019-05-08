@@ -22,6 +22,17 @@ public class Player {
 		properties.add(newProperty);
 	}
 	
+	public void removeProperty(String propertyName) {
+		int i = 0;
+		for (Property property : properties) {
+			if (property.name.equalsIgnoreCase(propertyName)) {
+				properties.remove(i);
+				break;
+			}
+			i++;
+		}
+	}
+	
 	public Property getProperty(String name) {
 		for (Property property : properties) {
 			if (property.name.equalsIgnoreCase(name)) {

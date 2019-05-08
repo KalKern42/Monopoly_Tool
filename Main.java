@@ -29,7 +29,7 @@ class Main {
 		//prop3.houses = 3;
 		//prop3.hotel = true;
 		//p1.giveProperty(prop4);
-		p1.giveProperty(prop);
+		//p1.giveProperty(prop);
 		p1.giveProperty(prop3);
 		//commands.propertyStats(prop);
 		//commands.playerStats(p1);
@@ -41,11 +41,8 @@ class Main {
 		//commands.payRent(p2, prop3);
 		p1.cash = 2350;
 		//commands.purchaseProperty(p1, prop3);
-		commands.mortgageProperty("boardwalk");
-		commands.sellHouses("boardwalk", 2);
-		commands.mortgageProperty("boardwalk");
-		commands.sellHouses("park place", 4);
-		commands.mortgageProperty("boardwalk");
+		commands.givePropertyToPlayer("boardwalk", "Player2");
+
 	}
 }
 
