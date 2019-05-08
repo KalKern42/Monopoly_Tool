@@ -16,7 +16,6 @@ class Main {
 		Property prop2 = properties.get("mediterranean avenue");
 		Property prop3 = properties.get("park place");
 		Property prop4 = properties.get("electric company");
-
 		
 		p1.giveProperty(prop2);
 		//p1.giveProperty(prop3);
@@ -41,7 +40,7 @@ class Main {
 		//commands.payRent(p2, prop3);
 		p1.cash = 2350;
 		//commands.purchaseProperty(p1, prop3);
-		commands.givePropertyToPlayer("boardwalk", "Player2");
+		commands.propertyStats("boardwalk");
 
 	}
 }

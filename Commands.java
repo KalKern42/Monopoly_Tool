@@ -48,10 +48,17 @@ elif (usrImpt.contains(command name){
 				//printing a list of commands
 				for (int r = 0; r < comlist.length; r++) {
 					//output formating too look nice
-					System.out.println(comlist[r]);
+					System.out.println("\t" + comlist[r]);
 					
 				}
+			}else if (usrImpt.contains("propstats")) {
+				actCommand = "propstats";
+				String[] stringArray = usrImpt.split(" ");
+				comHands = commandPlex(stringArray, "propstats");
+				Data.commands.propertyStats(comHands[1]);
 			}
+			
+			
 			else{
 				System.out.println("I sorry that is not a command, if you would like to a list of commands type: help");
 			}
@@ -66,15 +73,20 @@ elif (usrImpt.contains(command name){
 		String[] commTarg = new String[5];
 		String storage = "";
 		
+		
 		for (int c = 0; c < commBit.length; c++){
 			storage = commBit[c]; //for easy comparing
 			
-			if (storage.contains(atCommand)) {
+			if (commBit[c].contains(atCommand)) {
 				commTarg[c] = "";
 			}else {
 				commTarg[c] = commBit[c];
 			}
 			//the command targets are stored and returns but the command is not
+		}
+		
+		for (String targ : commTarg) {
+			//System.out.print(targ);
 		}
 		
 		return(commTarg);
