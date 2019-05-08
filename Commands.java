@@ -13,12 +13,12 @@ import javax.xml.bind.attachment.*;
 class Commands {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		int stayIn = 0; //how to exit the loop
-		String usrImpt = ""; //for basic commands and leaving the loop
+		int stayIn        = 0; //how to exit the loop
+		String usrImpt    = ""; //for basic commands and leaving the loop
 		String commTarget = ""; //this is what the commands will be targeting
 		String actCommand = ""; //this is for taking the commands into other methods
 		String[] comHands = new String[5]; //for the more complex commands requiring more than one target (also sorry for the pun)
-		String[] comlist = { "help" , "kill" , "trade" };
+		String[] comlist  = { "help  displays a list of commands" , "kill [player]  removes player" , "trade [player1] [player2]  choose a property to go from player1 to player 2" };
 		
 		
 		System.out.println("Begining Monopoly Commands..... ");
@@ -46,11 +46,8 @@ elif (usrImpt.contains(command name){
 				//printing a list of commands
 				for (int r = 0; r < comlist.length; r++) {
 					//output formating too look nice
-					if (r == comlist.length - 1) {
-						System.out.println(comlist[r]);
-					}else {
-						System.out.print(comlist[r] + ", ");
-					}
+					System.out.println(comlist[r]);
+					
 				}
 			}
 			else{
