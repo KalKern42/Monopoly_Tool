@@ -11,6 +11,10 @@ import java.util.*;
 import javax.xml.bind.attachment.*;
 
 class Commands {
+	
+	public static final String ANSI_RESET = "\u001B[0m"; // hope you don't mind a little bit of text formatting
+	public static final String ANSI_BOLD = "\033[1;99m";
+	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		int stayIn        = 0; //how to exit the loop
@@ -22,13 +26,15 @@ class Commands {
 		
 		
 		System.out.println("Begining Monopoly Commands..... ");
-		System.out.println("(type: 'lmo' to leave)");
+		System.out.println("(type: 'lmo' to leave)\n");
 				
 		while (stayIn == 0) {
-			System.out.print("Monopoly User: ");
+			System.out.print(ANSI_BOLD + "Monopoly User: " + ANSI_RESET);
 			usrImpt = input.nextLine();
 			usrImpt = usrImpt.toLowerCase();
 			comHands = usrImpt.split(" ");
+			
+			System.out.println("");
 			
 /* these are going to be the commands. 
 Adding a new comand looks like:
@@ -40,6 +46,10 @@ elif (usrImpt.contains(command name){
 			}else if (usrImpt.contains("kill")) { //single command
 				commTarget = commandMod(usrImpt, 4);
 				
+			}else if (usrImpt.contains("clear")) {
+				for (int i = 0; i < 30; i++) {
+					System.out.println("");
+				}	
 			}else if (usrImpt.contains("trade")) {
 				actCommand = "trade";
 				comHands = commandPlex(comHands, "trade");
@@ -49,18 +59,146 @@ elif (usrImpt.contains(command name){
 				for (int r = 0; r < comlist.length; r++) {
 					//output formating too look nice
 					System.out.println("\t" + comlist[r]);
-					
 				}
-			}else if (usrImpt.contains("propstats")) {
-				actCommand = "propstats";
-				String[] stringArray = usrImpt.split(" ");
-				comHands = commandPlex(stringArray, "propstats");
-				Data.commands.propertyStats(comHands[1]);
+				System.out.println("");
+			}else if (usrImpt.contains(" stats")) {
+				actCommand = "stats";
+				comHands = commandPlex(comHands, "stats");
+				Data.commands.stats(comHands[0]);	
+			}
+						
+			else if (usrImpt.equals("all properties")) { // list all properties
+				actCommand = "properties all";
+				Data.commands.allProperties();
 			}
 			
+			else if (usrImpt.contains(" properties")) { // if previous didn't happen, assume they want a specific color
+				actCommand = "properties";
+				comHands = commandPlex(comHands, "properties");
+				Data.commands.propertiesByType(comHands[0]);
+			}
 			
-			else{
-				System.out.println("I sorry that is not a command, if you would like to a list of commands type: help");
+			else if (usrImpt.equals("players")) { // if previous didn't happen, assume they want a specific color
+				actCommand = "players";
+				Data.commands.playersOverview();
+			}
+			
+			else if (usrImpt.contains(" +$ ") || usrImpt.contains(" $+ ")) {
+				actCommand = "money";
+				comHands = commandPlex(comHands, "+$");
+				int amount = 0;
+				try {
+					amount = Integer.parseInt(comHands[2]);
+				} catch (Exception e) {
+					amount = 0;
+				}
+				Data.commands.incrementMoney(comHands[0], amount);
+			}
+			
+			else if (usrImpt.contains(" -$ ") || usrImpt.contains(" $- ")) {
+				actCommand = "money";
+				comHands = commandPlex(comHands, "-$");
+				int amount = 0;
+				try {
+					amount = -Integer.parseInt(comHands[2]);
+				} catch (Exception e) {
+					amount = 0;
+				}
+				Data.commands.incrementMoney(comHands[0], amount);
+			}
+			
+			else if (usrImpt.contains(" send ")) {
+				actCommand = "send";
+				comHands = commandPlex(comHands, "send");
+				int amount = 0;
+				try {
+					amount = Integer.parseInt(comHands[3]);
+				} catch (Exception e) {
+					amount = 0;
+				}
+				Data.commands.transferMoney(comHands[0], comHands[2], amount);
+			}
+			
+			else if (usrImpt.contains(" rent ")) { // TODO: revist and make sure whitespace works for all output variants
+				actCommand = "rent";
+				comHands = commandPlex(comHands, "rent");
+				Data.commands.payRent(comHands[0], comHands[2]);
+			}
+			
+			else if (usrImpt.contains(" buy ")) {
+				actCommand = "buy";
+				comHands = commandPlex(comHands, "buy");
+				Data.commands.purchaseProperty(comHands[0], comHands[2]);
+			}
+			
+			else if (usrImpt.contains("unmortgage ")) {
+				actCommand = "unmortgage";
+				comHands = commandPlex(comHands, "unmortgage");
+				Data.commands.unmortgageProperty(comHands[1]);
+			}
+			
+			else if (usrImpt.contains("mortgage ")) {
+				actCommand = "mortgage";
+				comHands = commandPlex(comHands, "mortgage");
+				Data.commands.mortgageProperty(comHands[1]);
+			}
+			
+			else if (usrImpt.contains(" +houses ") || usrImpt.contains(" houses+ ")) {
+				actCommand = "houses";
+				comHands = commandPlex(comHands, "+houses");
+				int amount = 0;
+				try {
+					amount = Integer.parseInt(comHands[2]);
+				} catch (Exception e) {
+					amount = 0;
+				}
+				Data.commands.purchaseHouses(comHands[0], amount);
+			}
+			
+			else if (usrImpt.contains(" +house") || usrImpt.contains(" house+")) { // only 1 house
+				actCommand = "houses";
+				comHands = commandPlex(comHands, "+houses");
+				Data.commands.purchaseHouses(comHands[0], 1);
+			}
+			
+			else if (usrImpt.contains(" -houses ") || usrImpt.contains(" houses- ")) {
+				actCommand = "houses";
+				comHands = commandPlex(comHands, "+houses");
+				int amount = 0;
+				try {
+					amount = Integer.parseInt(comHands[2]);
+				} catch (Exception e) {
+					amount = 0;
+				}
+				Data.commands.sellHouses(comHands[0], amount);
+			}
+			
+			else if (usrImpt.contains(" -house") || usrImpt.contains(" house-")) { // only 1 house
+				actCommand = "houses";
+				comHands = commandPlex(comHands, "+houses");
+				Data.commands.sellHouses(comHands[0], 1);
+			}
+
+			else if (usrImpt.contains(" +hotel") || usrImpt.contains(" hotel+")) {
+				actCommand = "hotel";
+				comHands = commandPlex(comHands, "+hotel");
+				Data.commands.purchaseHotel(comHands[0]);
+			}
+			
+			else if (usrImpt.contains(" -hotel") || usrImpt.contains(" hotel-")) {
+				actCommand = "hotel";
+				comHands = commandPlex(comHands, "+hotel");
+				Data.commands.sellHotel(comHands[0]);
+			}
+			
+			else if (usrImpt.contains("assignto")) {
+				actCommand = "assignto";
+				comHands = commandPlex(comHands, "assignto");
+				Data.commands.givePropertyToPlayer(comHands[0], comHands[2]);
+			}
+			
+			else {
+				System.out.println("I'm sorry that is not a command, if you would like to a list of commands type: help");
 			}
 		}
 	}

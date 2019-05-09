@@ -24,7 +24,7 @@ public class Misc {
 			ArrayList<Property> returnList = new ArrayList<Property>();
 			
 			for (Property property : listOfProperties) {
-				if (property.color == color) {
+				if (property.color.equalsIgnoreCase(color)) {
 					returnList.add(property);
 				}
 			}

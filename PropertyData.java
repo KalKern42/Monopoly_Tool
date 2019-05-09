@@ -30,7 +30,7 @@ public class PropertyData {
 	}
 	
 	public PropertyData() {
-		Property m_a = new Property("brown", "Mediterranean avenue");
+		Property m_a = new Property("brown", "Mediterranean_avenue");
 		m_a.price = 60;
 		m_a.mortgage = 30;
 		m_a.housePrice = 50;
@@ -38,7 +38,7 @@ public class PropertyData {
 		m_a.hotelRent = 250;
 		propertyList.add(m_a);
 		
-		Property b_a = new Property("brown", "Baltic avenue");
+		Property b_a = new Property("brown", "Baltic_avenue");
 		b_a.price = 60;
 		b_a.mortgage = 30;
 		b_a.housePrice = 50;
@@ -46,7 +46,7 @@ public class PropertyData {
 		b_a.hotelRent = 450;
 		propertyList.add(b_a);
 		
-		Property o_a = new Property("light blue", "Oriental avenue");
+		Property o_a = new Property("light_blue", "Oriental_avenue");
 		o_a.price = 100;
 		o_a.mortgage = 50;
 		o_a.housePrice = 50;
@@ -54,7 +54,7 @@ public class PropertyData {
 		o_a.hotelRent = 550;
 		propertyList.add(o_a);
 		
-		Property v_a = new Property("light blue", "Vermont avenue");
+		Property v_a = new Property("light_blue", "Vermont_avenue");
 		v_a.price = 100;
 		v_a.mortgage = 50;
 		v_a.housePrice = 50;
@@ -62,7 +62,7 @@ public class PropertyData {
 		v_a.hotelRent = 550;
 		propertyList.add(v_a);
 		
-		Property c_a = new Property("light blue", "Conneticut avenue");
+		Property c_a = new Property("light_blue", "Conneticut_avenue");
 		c_a.price = 120;
 		c_a.mortgage = 60;
 		c_a.housePrice = 50;
@@ -70,7 +70,7 @@ public class PropertyData {
 		c_a.hotelRent = 600;
 		propertyList.add(c_a);
 		
-		Property s_c_p = new Property("Magenta", "St. Charles place");
+		Property s_c_p = new Property("Magenta", "St. Charles_place");
 		s_c_p.price = 140;
 		s_c_p.mortgage = 70;
 		s_c_p.housePrice = 100;
@@ -78,7 +78,7 @@ public class PropertyData {
 		s_c_p.hotelRent = 750;
 		propertyList.add(s_c_p);
 		
-		Property s_a = new Property("Magenta", "States avenue");
+		Property s_a = new Property("Magenta", "States_avenue");
 		s_a.price = 140;
 		s_a.mortgage = 70;
 		s_a.housePrice = 100;
@@ -86,7 +86,7 @@ public class PropertyData {
 		s_a.hotelRent = 750;
 		propertyList.add(s_a);
 		
-		Property vi_a = new Property("Magenta", "Virginia avenue");
+		Property vi_a = new Property("Magenta", "Virginia_avenue");
 		vi_a.price = 160;
 		vi_a.mortgage = 80;
 		vi_a.housePrice = 100;
@@ -94,7 +94,7 @@ public class PropertyData {
 		vi_a.hotelRent = 900;
 		propertyList.add(vi_a);
 		
-		Property s_j_p = new Property("Orange", "St. James place");
+		Property s_j_p = new Property("Orange", "St_James_place");
 		s_j_p.price = 180;
 		s_j_p.mortgage = 90;
 		s_j_p.housePrice = 100;
@@ -102,7 +102,7 @@ public class PropertyData {
 		s_j_p.hotelRent = 950;
 		propertyList.add(s_j_p);
 		
-		Property t_a = new Property("Orange", "Tennessee avenue");
+		Property t_a = new Property("Orange", "Tennessee_avenue");
 		t_a.price = 180;
 		t_a.mortgage = 90;
 		t_a.housePrice = 100;
@@ -110,7 +110,7 @@ public class PropertyData {
 		t_a.hotelRent = 950;
 		propertyList.add(t_a);
 		
-		Property n_y_a = new Property("Orange", "New York avenue");
+		Property n_y_a = new Property("Orange", "New_York_avenue");
 		n_y_a.price = 200;
 		n_y_a.mortgage = 100;
 		n_y_a.housePrice = 100;
@@ -118,7 +118,7 @@ public class PropertyData {
 		n_y_a.hotelRent = 1000;
 		propertyList.add(n_y_a);
 		
-		Property k_a = new Property("red", "Kentucky avenue");
+		Property k_a = new Property("red", "Kentucky_avenue");
 		k_a.price = 220;
 		k_a.mortgage = 110;
 		k_a.housePrice = 150;
@@ -126,7 +126,7 @@ public class PropertyData {
 		k_a.hotelRent = 1050;
 		propertyList.add(k_a);
 		
-		Property in_a = new Property("red", "Indiana avenue");
+		Property in_a = new Property("red", "Indiana_avenue");
 		in_a.price = 220;
 		in_a.mortgage = 110;
 		in_a.housePrice = 150;
@@ -134,7 +134,7 @@ public class PropertyData {
 		in_a.hotelRent = 1050;
 		propertyList.add(in_a);
 		
-		Property il_a = new Property("red", "Illinois avenue");
+		Property il_a = new Property("red", "Illinois_avenue");
 		il_a.price = 240;
 		il_a.mortgage = 120;
 		il_a.housePrice = 150;
@@ -142,7 +142,7 @@ public class PropertyData {
 		il_a.hotelRent = 1100;
 		propertyList.add(il_a);
 		
-		Property a_a = new Property("yellow", "atlantic avenue");
+		Property a_a = new Property("yellow", "atlantic_avenue");
 		a_a.price = 260;
 		a_a.mortgage = 130;
 		a_a.housePrice = 150;
@@ -150,7 +150,7 @@ public class PropertyData {
 		a_a.hotelRent = 1150;
 		propertyList.add(a_a);
 		
-		Property ve_a = new Property("yellow", "Ventor avenue");
+		Property ve_a = new Property("yellow", "Ventor_avenue");
 		ve_a.price = 260;
 		ve_a.mortgage = 130;
 		ve_a.housePrice = 150;
@@ -158,7 +158,7 @@ public class PropertyData {
 		ve_a.hotelRent = 1150;
 		propertyList.add(ve_a);
 		
-		Property m_g = new Property("yellow", "Marvin gardens");
+		Property m_g = new Property("yellow", "Marvin_gardens");
 		m_g.price = 280;
 		m_g.mortgage = 140;
 		m_g.housePrice = 150;
@@ -166,7 +166,7 @@ public class PropertyData {
 		m_g.hotelRent = 1200;
 		propertyList.add(m_g);
 		
-		Property p_a = new Property("green", "Pacific avenue");
+		Property p_a = new Property("green", "Pacific_avenue");
 		p_a.price = 300;
 		p_a.mortgage = 150;
 		p_a.housePrice = 150;
@@ -174,7 +174,7 @@ public class PropertyData {
 		p_a.hotelRent = 1275;
 		propertyList.add(p_a);
 		
-		Property n_c_a = new Property("green", "North Carolina avenue");
+		Property n_c_a = new Property("green", "North_Carolina_avenue");
 		n_c_a.price = 300;
 		n_c_a.mortgage = 150;
 		n_c_a.housePrice = 150;
@@ -182,7 +182,7 @@ public class PropertyData {
 		n_c_a.hotelRent = 1275;
 		propertyList.add(n_c_a);
 		
-		Property pe_a = new Property("green", "Pensylvania avenue");
+		Property pe_a = new Property("green", "Pensylvania_avenue");
 		pe_a.price = 320;
 		pe_a.mortgage = 160;
 		pe_a.housePrice = 150;
@@ -190,7 +190,7 @@ public class PropertyData {
 		pe_a.hotelRent = 1400;
 		propertyList.add(pe_a);
 		
-		Property p_p = new Property("dark blue", "Park place");
+		Property p_p = new Property("dark_blue", "Park_place");
 		p_p.price = 350;
 		p_p.mortgage = 175;
 		p_p.housePrice = 175;
@@ -198,7 +198,7 @@ public class PropertyData {
 		p_p.hotelRent = 1500;
 		propertyList.add(p_p);
 		
-		Property b = new Property("dark blue", "Boardwalk");
+		Property b = new Property("dark_blue", "Boardwalk");
 		b.price = 400;
 		b.mortgage = 200;
 		b.housePrice = 175;
@@ -206,37 +206,37 @@ public class PropertyData {
 		b.hotelRent = 2000;
 		propertyList.add(b);
 		
-		Property r_r = new Property("railroad", "Reading railroad");
+		Property r_r = new Property("railroad", "Reading_railroad");
 		r_r.railroad = true;
 		r_r.price = 200;
 		r_r.mortgage = 100;
 		propertyList.add(r_r);
 		
-		Property p_r = new Property("railroad", "pennsylvania railroad");
+		Property p_r = new Property("railroad", "pennsylvania_railroad");
 		p_r.railroad = true;
 		p_r.price = 200;
 		p_r.mortgage = 100;
 		propertyList.add(p_r);
 		
-		Property b_r = new Property("railroad", "B. & O. railroad");
+		Property b_r = new Property("railroad", "B_&_O_railroad");
 		b_r.railroad = true;
 		b_r.price = 200;
 		b_r.mortgage = 100;
 		propertyList.add(b_r);
 		
-		Property s_r = new Property("railroad", "Short line");
+		Property s_r = new Property("railroad", "Short_line");
 		s_r.railroad = true;
 		s_r.price = 200;
 		s_r.mortgage = 100;
 		propertyList.add(s_r);
 		
-		Property e_c = new Property("utility", "Electric company");
+		Property e_c = new Property("utility", "Electric_company");
 		e_c.utility = true;
 		e_c.price = 150;
 		e_c.mortgage = 75;
 		propertyList.add(e_c);
 		
-		Property w_w = new Property("utility", "Water works");
+		Property w_w = new Property("utility", "Water_works");
 		w_w.utility = true;
 		w_w.price = 150;
 		w_w.mortgage = 75;

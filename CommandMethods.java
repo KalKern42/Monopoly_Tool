@@ -18,6 +18,26 @@ public class CommandMethods {
 		}
 		propertyStats(property);
 	}
+	
+	public void stats(String thingName) {
+
+		for (Player p : players.playerList) {
+			if (p.name.equalsIgnoreCase(thingName)) {
+				playerStats(thingName);
+				return;
+			}
+		}
+		
+		for (Property pr : properties.propertyList) {
+			if (pr.name.equalsIgnoreCase(thingName)) {
+				propertyStats(thingName);
+				return;
+			}
+		}
+
+		System.out.println(ANSI_LIGHT_RED  + thingName.toUpperCase() + " not found!" + ANSI_RESET);
+	}
+	
 
 	public void propertyStats(Property property) {
 		String icon = Misc.getIconForProperty(property);		
@@ -68,7 +88,7 @@ public class CommandMethods {
 	public void playerProperties(Player player) {
 		String title = ANSI_BOLD + player.toString().toUpperCase() + " PROPERTIES (" + player.properties.size() + ")" + ANSI_RESET;
 		String printOut = title + "\n"
-						+ Misc.createPropertyList(player.properties, "\t  ") + "\n";
+						+ Misc.createPropertyList(player.properties, "   ") + "\n";
 		System.out.print(printOut);
 	}
 	
@@ -149,6 +169,7 @@ public class CommandMethods {
 			return;
 		}
 		incrementMoney(player, delta);
+		System.out.println("");
 	}
 	
 	
@@ -206,6 +227,7 @@ public class CommandMethods {
 			incrementMoney(from, -delta);
 			incrementMoney(to, delta);
 		}
+		System.out.println("");
 	}
 	
 	public void payRent(String playerName, String propertyName) {
@@ -239,7 +261,7 @@ public class CommandMethods {
 		}
 		
 		if (rentDue == 0 || property.owner.name == player.name) {
-			System.out.print(printOut + "\033[1;92m No rent due!");
+			System.out.print(printOut + "\033[1;92m No rent due!\n\n" + ANSI_RESET);
 			return;
 		}
 		
@@ -275,7 +297,7 @@ public class CommandMethods {
 		System.out.println(property.name.toUpperCase() + " :\033[0;91m $" + propertyPrice + ANSI_RESET);
 		System.out.println(player.name.toUpperCase() + " :\033[1;92m $" + player.cash + ANSI_RESET);
 		
-		System.out.print(property.owner.name.toUpperCase() + ", purchase " + property.name.toUpperCase() + " for $" + propertyPrice + "? (y/n) ");
+		System.out.print(player.name.toUpperCase() + ", purchase " + property.name.toUpperCase() + " for $" + propertyPrice + "? (y/n) ");
 		Scanner input = new Scanner(System.in);
 		
 		String response = "";		
@@ -285,7 +307,7 @@ public class CommandMethods {
 			if (response.equals("y")) {
 				System.out.print("\t");
 				incrementMoney(player, -propertyPrice);
-				System.out.print("\t\033[1;92m+" + property.name.toUpperCase() + "\n");
+				System.out.println("\t\033[1;92m+" + property.name.toUpperCase() + "\n" + ANSI_RESET);
 				player.giveProperty(property);
 				break;
 			}
@@ -309,6 +331,17 @@ public class CommandMethods {
 		float housesPerProperty = 0;
 		boolean anyHotels = false;
 		
+		
+		if (property.owner == null) {
+			System.out.println("\033[0;91m" + property.name.toUpperCase() + " doesn't even have an owner!\n"+ ANSI_RESET);
+			return;
+		}
+		
+		if (property.mortgaged == true) {
+			System.out.println("\033[0;91m" + property.name.toUpperCase() + " is already mortgaged!\n"+ ANSI_RESET);
+			return;
+		}
+		
 		ArrayList<Property> propertiesOfColor = Misc.findAllOfColor(property.color, property.owner.properties);
 		ArrayList<Property> allOfColor = Misc.findAllOfColor(property.color, Data.properties.propertyList);
 		
@@ -320,14 +353,10 @@ public class CommandMethods {
 		}
 		
 		if (housesPerProperty != 0 || anyHotels == true) {
-			System.out.print("\033[0;91m"+"Must sell all houses/hotels before mortgaging a property!\n"+ ANSI_RESET);
+			System.out.println("\033[0;91m"+"Must sell all houses/hotels before mortgaging a property!\n"+ ANSI_RESET);
 			return;
 		}
 		
-		if (property.owner == null) {
-			System.out.print("\033[0;91m" + property.name.toUpperCase() + " doesn't even have an owner!\n"+ ANSI_RESET);
-			return;
-		}
 				
 		System.out.print(property.owner.name.toUpperCase() + ", mortgage " + property.name.toUpperCase() + " in exchange for\033[1;92m $" + property.mortgage + "?" + ANSI_RESET + " (y/n) ");
 		
@@ -340,7 +369,7 @@ public class CommandMethods {
 			if (response.equals("y")) {
 				System.out.print("\t");
 				incrementMoney(property.owner, property.mortgage);
-				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t\u001B[31m MORTGAGED\n" + ANSI_RESET);
+				System.out.println("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t\u001B[31m MORTGAGED\n" + ANSI_RESET);
 				property.mortgaged = true;
 				break;
 			}
@@ -362,20 +391,20 @@ public class CommandMethods {
 	
 	public void unmortgageProperty(Property property) {
 		
-		int unmortgagePrice = (int)Math.ceil(property.mortgage * 1.1);
+		int unmortgagePrice = (int)Math.round(property.mortgage * 1.1);
 		
 		if (property.owner == null) {
-			System.out.print("\033[0;91m" + property.name.toUpperCase() + " doesn't even have an owner!\n"+ ANSI_RESET);
+			System.out.println("\033[0;91m" + property.name.toUpperCase() + " doesn't even have an owner!\n"+ ANSI_RESET);
 			return;
 		}
 		
 		if (property.owner.cash < unmortgagePrice) {
-			System.out.print("\033[0;91m" + property.owner.name.toUpperCase() + " has only $" + property.owner.cash + "\nThey need $" + (unmortgagePrice - property.owner.cash) + " more to unmortgage " + property.toString().toUpperCase()+ "\n" + ANSI_RESET);
+			System.out.println("\033[0;91m" + property.owner.name.toUpperCase() + " has only $" + property.owner.cash + "\nThey need $" + (unmortgagePrice - property.owner.cash) + " more to unmortgage " + property.toString().toUpperCase()+ "\n" + ANSI_RESET);
 			return;
 		}
 		
-		if (!property.mortgaged) {
-			System.out.print("\033[0;91m" + property.name.toUpperCase() + " isn't even mortgaged!\n"+ ANSI_RESET);
+		if (property.mortgaged != true) {
+			System.out.println("\033[0;91m" + property.name.toUpperCase() + " isn't even mortgaged!\n"+ ANSI_RESET);
 			return;
 		}
 		
@@ -391,7 +420,7 @@ public class CommandMethods {
 			if (response.equals("y")) {
 				System.out.print("\t");
 				incrementMoney(property.owner, -unmortgagePrice);
-				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t\033[1;92m UNMORTGAGED" + ANSI_RESET);
+				System.out.println("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t\033[1;92m UNMORTGAGED\n" + ANSI_RESET);
 				property.mortgaged = false;
 				break;
 			}
@@ -413,24 +442,24 @@ public class CommandMethods {
 	public void purchaseHouses(Property property, int houses) {
 		
 		if (property.owner == null) {
-			System.out.print("\033[0;91m" + "This property has no owner!\n" + ANSI_RESET);
+			System.out.println("\033[0;91m" + "This property has no owner!\n" + ANSI_RESET);
 			return;
 		}
 		if (property.mortgaged == true) {
-			System.out.print("\033[0;91m" + "You can't purchase houses for mortgaged properties!\n" + ANSI_RESET);
+			System.out.println("\033[0;91m" + "You can't purchase houses for mortgaged properties!\n" + ANSI_RESET);
 			return;
 		}
 		
 		if (houses < 0) {
-			System.out.print("\033[0;91m" + "Can't purchase negative houses!\n"+ ANSI_RESET);
+			System.out.println("\033[0;91m" + "Can't purchase negative houses!\n"+ ANSI_RESET);
 			return;
 		}
 		if (property.houses + houses > 4) {
-			System.out.print("\033[0;91m" + "A property can only have up to 4 houses!" + ANSI_RESET);
+			System.out.println("\033[0;91m" + "A property can only have up to 4 houses!" + ANSI_RESET);
 			return;
 		}
 		if (property.utility || property.railroad) {
-			System.out.print("\033[0;91m" + "Railroads and utilities can't have houses!\n" + ANSI_RESET);
+			System.out.println("\033[0;91m" + "Railroads and utilities can't have houses!\n" + ANSI_RESET);
 			return;
 		}
 		
@@ -452,7 +481,7 @@ public class CommandMethods {
 		int price = property.housePrice * houses;
 		
 		if (property.owner.cash < price) {
-			System.out.print("\033[0;91m" + "You need $" + (price - property.owner.cash) + " more to make this transaction.\n" + ANSI_RESET);
+			System.out.println("\033[0;91m" + "You need $" + (price - property.owner.cash) + " more to make this transaction.\n" + ANSI_RESET);
 			return;
 		}
 		
@@ -468,7 +497,7 @@ public class CommandMethods {
 				System.out.print("\t");
 				incrementMoney(property.owner, -price);
 				property.houses += houses;
-				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property) + "\n");
+				System.out.println("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property) + "\n");
 				break;
 			}
 			if (response.equals("n")) {
@@ -514,7 +543,7 @@ public class CommandMethods {
 		}
 			
 			
-		int gain = (int)Math.ceil(property.housePrice * houses * 0.5);
+		int gain = (int)Math.round(property.housePrice * houses * 0.5);
 		
 		System.out.print(property.owner.name.toUpperCase() + ", sell " + houses + " houses on " + property.name.toUpperCase() + " for\033[1;92m $" + gain + "?" + ANSI_RESET + " (y/n) ");
 		
@@ -527,7 +556,7 @@ public class CommandMethods {
 				System.out.print("\t");
 				incrementMoney(property.owner, gain);
 				property.houses -= houses;
-				System.out.print("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property) + "\n" + ANSI_RESET);
+				System.out.println("\t" + property.name.toUpperCase() + ANSI_BOLD + "\t " + Misc.getIconForProperty(property) + "\n" + ANSI_RESET);
 				break;
 			}
 			if (response.equals("n")) {
@@ -635,7 +664,7 @@ public class CommandMethods {
 			return;
 		}
 		
-		int gain = (int)Math.ceil(property.houseRent[4] * 0.5);		
+		int gain = (int)Math.round(property.houseRent[4] * 0.5);		
 		
 		System.out.print(property.owner.name.toUpperCase() + ", sell a hotel on " + property.name.toUpperCase() + " for\033[1;92m $" + gain + "?" + ANSI_RESET + " (y/n) ");
 		
@@ -689,10 +718,10 @@ public class CommandMethods {
 				System.out.print("\t");
 				if (property.owner != null) {
 					property.owner.removeProperty(upperName);
-					System.out.print(property.owner.name.toUpperCase() + ANSI_LIGHT_RED + " -" + upperName + "\n" + ANSI_RESET);
+					System.out.println(property.owner.name.toUpperCase() + ANSI_LIGHT_RED + " -" + upperName + "\n" + ANSI_RESET);
 				}
 				player.giveProperty(property);
-				System.out.print("\t" + player.name.toUpperCase() + ANSI_LIGHT_GREEN + " +" + upperName + "\n" + ANSI_RESET);
+				System.out.println("\t" + player.name.toUpperCase() + ANSI_LIGHT_GREEN + " +" + upperName + "\n" + ANSI_RESET);
 				break;
 			}
 			if (response.equals("n")) {
