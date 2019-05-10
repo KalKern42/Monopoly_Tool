@@ -15,7 +15,7 @@ public class SetUp {
 		illegalNames.add("oriental");
 		illegalNames.add("vermont");
 		illegalNames.add("conneticut");
-		illegalNames.add("st.");
+		illegalNames.add("st");
 		illegalNames.add("states");
 		illegalNames.add("virginia");
 		illegalNames.add("tennessee");
@@ -32,7 +32,6 @@ public class SetUp {
 		illegalNames.add("park");
 		illegalNames.add("boardwalk");
 		illegalNames.add("reading");
-		illegalNames.add("b");
 		illegalNames.add("short");
 		illegalNames.add("electric");
 		illegalNames.add("water");
