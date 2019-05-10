@@ -23,13 +23,26 @@ class Commands {
 		String actCommand = ""; //this is for taking the commands into other methods
 		String[] comHands = new String[5]; //for the more complex commands requiring more than one target (also sorry for the pun)
 		String[] comlist  = {
-			"help  \t\t\t\tdisplays a list of commands" , 
-			"kill [player]  \t\t\tremoves player" ,
-			"trade [player1] [player2] \tchoose a property to go from player1 to player2" };
+			"cmds  \t\t\t\t\tdisplays a list of commands" , 
+			"all properties \t\t\t\tdisplays a list of every property in the game",
+			"[color] properties \t\t\tdisplays a list of every property of same color or type",
+			"players \t\t\t\tdisplays a quick overview of each player",
+			"[player] +$ [amount]\t\t\tadds money to player's bank account",
+			"[player] -$ [amount]\t\t\tsubtracts money from a player's bank accounts",
+			"[player1] send [player2] [amount] \tsends money from one player to another",
+			"[player] rent [property]\t\tprompts the player to pay the rent fee for a property",
+			"[player] buy [property]\t\t\tprompts the player to buy a property",
+			"mortgage [property]\t\t\tprompts the player to mortgage one of their properties",
+			"unmortgage [property]\t\t\tprompts the player to unmortgage one of their properties",
+			"[property] +houses [amount]\t\tprompts the player to buy houses for a property",
+			"[property] -houses [amount]\t\tprompts the player to sell houses from a property",
+			"[property] +hotel [amount]\t\tprompts the player to buy a hotel for a property",
+			"[property] -houses [amount]\t\tprompts the player to sell a property's hotel",
+		};
 		
 		
 		System.out.println("Begining Monopoly Commands..... ");
-		System.out.println("(type: 'lmo' to leave)\n");
+		System.out.println("(type: \"lmo\" to leave or \"cmds\" to see what you can do)\n");
 				
 		while (stayIn == 0) {
 			System.out.print(ANSI_BOLD + "> " + ANSI_RESET);
@@ -46,18 +59,15 @@ elif (usrImpt.contains(command name){
 }   ~~Reffer to kill as a refference also~~*/
 			if (usrImpt.contains("lmo")) {
 				stayIn = 1;
-			}else if (usrImpt.contains("kill")) { //single command
-				commTarget = commandMod(usrImpt, 4);
-				
 			}else if (usrImpt.contains("clear")) {
 				for (int i = 0; i < 30; i++) {
 					System.out.println("");
 				}	
-			}else if (usrImpt.contains("trade")) {
-				actCommand = "trade";
-				comHands = commandPlex(comHands, "trade");
-				
-			}else if (usrImpt.contains("cmds") || usrImpt.contains("commands")) {
+			}else if (usrImpt.equals("help") || usrImpt.equals("rules")) {
+				Data.commands.rules();
+			}
+			
+			else if (usrImpt.contains("cmds") || usrImpt.contains("commands")) {
 				//printing a list of commands
 				for (int r = 0; r < comlist.length; r++) {
 					//output formating too look nice
