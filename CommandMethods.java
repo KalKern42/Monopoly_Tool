@@ -698,7 +698,6 @@ public class CommandMethods {
 		givePropertyToPlayer(property, player);
 	}
 	
-	
 	public void givePropertyToPlayer(Property property, Player player) {
 		String upperName = property.name.toUpperCase();
 		if (property.owner != null) {
@@ -733,4 +732,4 @@ public class CommandMethods {
 
 }
 
-// TODO: sell properties
+// TODO: kill command

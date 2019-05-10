@@ -22,14 +22,17 @@ class Commands {
 		String commTarget = ""; //this is what the commands will be targeting
 		String actCommand = ""; //this is for taking the commands into other methods
 		String[] comHands = new String[5]; //for the more complex commands requiring more than one target (also sorry for the pun)
-		String[] comlist  = { "help  displays a list of commands" , "kill [player]  removes player" , "trade [player1] [player2]  choose a property to go from player1 to player 2" };
+		String[] comlist  = {
+			"help  \t\t\t\tdisplays a list of commands" , 
+			"kill [player]  \t\t\tremoves player" ,
+			"trade [player1] [player2] \tchoose a property to go from player1 to player2" };
 		
 		
 		System.out.println("Begining Monopoly Commands..... ");
 		System.out.println("(type: 'lmo' to leave)\n");
 				
 		while (stayIn == 0) {
-			System.out.print(ANSI_BOLD + "Monopoly User: " + ANSI_RESET);
+			System.out.print(ANSI_BOLD + "> " + ANSI_RESET);
 			usrImpt = input.nextLine();
 			usrImpt = usrImpt.toLowerCase();
 			comHands = usrImpt.split(" ");
@@ -54,7 +57,7 @@ elif (usrImpt.contains(command name){
 				actCommand = "trade";
 				comHands = commandPlex(comHands, "trade");
 				
-			}else if (usrImpt.contains("help")) {
+			}else if (usrImpt.contains("cmds") || usrImpt.contains("commands")) {
 				//printing a list of commands
 				for (int r = 0; r < comlist.length; r++) {
 					//output formating too look nice
@@ -198,7 +201,7 @@ elif (usrImpt.contains(command name){
 			}
 			
 			else {
-				System.out.println("I'm sorry that is not a command, if you would like to a list of commands type: help");
+				System.out.println("I'm sorry that is not a command, if you would like to a list of commands type: cmds");
 			}
 		}
 	}
