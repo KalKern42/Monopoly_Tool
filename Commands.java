@@ -27,6 +27,8 @@ class Commands {
 			"all properties \t\t\t\tdisplays a list of every property in the game",
 			"[color] properties \t\t\tdisplays a list of every property of same color or type",
 			"players \t\t\t\tdisplays a quick overview of each player",
+			"[property] stats\t\t\tdisplays stats specific to a property",
+			"[player] stats\t\t\tdisplays stats specific to a player",
 			"[player] +$ [amount]\t\t\tadds money to player's bank account",
 			"[player] -$ [amount]\t\t\tsubtracts money from a player's bank accounts",
 			"[player1] send [player2] [amount] \tsends money from one player to another",
@@ -211,7 +213,7 @@ elif (usrImpt.contains(command name){
 			}
 			
 			else {
-				System.out.println("I'm sorry that is not a command, if you would like to a list of commands type: cmds");
+				System.out.println("I'm sorry that is not a command, if you would like a full list of commands type: cmds");
 			}
 		}
 	}

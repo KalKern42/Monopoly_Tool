@@ -50,6 +50,7 @@ public class CommandMethods {
 						+ "owner\t\t : " + property.owner 				+ "\n\t"
 						+ "color set\t : " + property.color				+ "\n\t"
 						+ "mortgage value\t : $" + property.mortgage 	+ "\n\t"
+						+ "price of house\t : $" + property.housePrice 	+ "\n\t"
 						+ "rent prices\t" 								+ "\n\t"
 						 +	Misc.getRentInfo(property) + "\n";
 						
@@ -135,10 +136,10 @@ public class CommandMethods {
 		ArrayList<Property> properties = Misc.findAllOfColor(color, Data.properties.propertyList);
 		
 		String keyName = color.toUpperCase() + " PROPERTIES";
-		if (color == "railroad") {
+		if (color.equals("railroad")) {
 			keyName = "RAILROADS";
 		}
-		if (color == "utility") {
+		if (color.equals("utility")) {
 			keyName = "UTILITIES";
 		}		
 		
@@ -261,7 +262,7 @@ public class CommandMethods {
 		}
 		
 		if (rentDue == 0 || property.owner.name == player.name) {
-			System.out.print(printOut + "\033[1;92m No rent due!\n\n" + ANSI_RESET);
+			System.out.println(printOut + "\033[1;92m No rent due!\n\n" + ANSI_RESET);
 			return;
 		}
 		
@@ -283,14 +284,14 @@ public class CommandMethods {
 	
 	public void purchaseProperty(Player player, Property property) {
 		if (property.owner != null) {
-			System.out.print("\033[0;91m" + property.toString().toUpperCase() + " isn't for sale!" + ANSI_RESET);
+			System.out.println("\033[0;91m" + property.toString().toUpperCase() + " isn't for sale!" + ANSI_RESET);
 			return;
 		}
 		
 		int propertyPrice = property.price;
 		
 		if (player.cash < propertyPrice) {
-			System.out.print("\033[0;91m" + player.name.toUpperCase() + " has only $" + player.cash + "\nThey need $" + (propertyPrice - player.cash) + " more to purchase " + property.toString().toUpperCase()+ ANSI_RESET);
+			System.out.println("\033[0;91m" + player.name.toUpperCase() + " has only $" + player.cash + "\nThey need $" + (propertyPrice - player.cash) + " more to purchase " + property.toString().toUpperCase()+ ANSI_RESET);
 			return;
 		}
 		
@@ -612,7 +613,7 @@ public class CommandMethods {
 			return;
 		}
 		
-		int price = property.houseRent[4];
+		int price = property.housePrice;
 		
 		if (property.owner.cash < price) {
 			System.out.print("\033[0;91m" + "You need $" + (price - property.owner.cash) + " more to make this transaction.\n" + ANSI_RESET);
@@ -664,7 +665,7 @@ public class CommandMethods {
 			return;
 		}
 		
-		int gain = (int)Math.round(property.houseRent[4] * 0.5);		
+		int gain = (int)Math.round(property.housePrice * 0.5);		
 		
 		System.out.print(property.owner.name.toUpperCase() + ", sell a hotel on " + property.name.toUpperCase() + " for\033[1;92m $" + gain + "?" + ANSI_RESET + " (y/n) ");
 		
@@ -717,7 +718,7 @@ public class CommandMethods {
 				System.out.print("\t");
 				if (property.owner != null) {
 					property.owner.removeProperty(upperName);
-					System.out.println(property.owner.name.toUpperCase() + ANSI_LIGHT_RED + " -" + upperName + "\n" + ANSI_RESET);
+					System.out.print(property.owner.name.toUpperCase() + ANSI_LIGHT_RED + " -" + upperName + "\n" + ANSI_RESET);
 				}
 				player.giveProperty(property);
 				System.out.println("\t" + player.name.toUpperCase() + ANSI_LIGHT_GREEN + " +" + upperName + "\n" + ANSI_RESET);

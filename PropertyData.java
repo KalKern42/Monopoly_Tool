@@ -62,7 +62,7 @@ public class PropertyData {
 		v_a.hotelRent = 550;
 		propertyList.add(v_a);
 		
-		Property c_a = new Property("light_blue", "Conneticut_avenue");
+		Property c_a = new Property("light_blue", "Connecticut_avenue");
 		c_a.price = 120;
 		c_a.mortgage = 60;
 		c_a.housePrice = 50;
@@ -70,7 +70,7 @@ public class PropertyData {
 		c_a.hotelRent = 600;
 		propertyList.add(c_a);
 		
-		Property s_c_p = new Property("Magenta", "St. Charles_place");
+		Property s_c_p = new Property("Magenta", "St_Charles_place");
 		s_c_p.price = 140;
 		s_c_p.mortgage = 70;
 		s_c_p.housePrice = 100;

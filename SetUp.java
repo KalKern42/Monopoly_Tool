@@ -3,10 +3,25 @@ import java.util.ArrayList;
 
 public class SetUp {
 	
+	public static ArrayList<String> illegalNames = new ArrayList<String>();
+	
+	public static String promptForName(int i) {
+		Scanner input = new Scanner(System.in);
+
+		System.out.print("What is the name of player " + i + "? " );
+		String name = input.next().toLowerCase();
+		for (String badName : illegalNames) {
+			if (name.contains(badName)) {
+				System.out.print("That name is forbidden. ");
+				name = promptForName(i);
+			}
+		}
+		return name;
+	}
+	
 	public static void start(){
 		Scanner input = new Scanner(System.in);
 		
-		ArrayList<String> illegalNames = new ArrayList<String>();
 		illegalNames.add("kill");
 		illegalNames.add("help");
 		
@@ -14,8 +29,8 @@ public class SetUp {
 		illegalNames.add("baltic");
 		illegalNames.add("oriental");
 		illegalNames.add("vermont");
-		illegalNames.add("conneticut");
-		illegalNames.add("st");
+		illegalNames.add("connecticut");
+		illegalNames.add("st_");
 		illegalNames.add("states");
 		illegalNames.add("virginia");
 		illegalNames.add("tennessee");
@@ -35,9 +50,6 @@ public class SetUp {
 		illegalNames.add("short");
 		illegalNames.add("electric");
 		illegalNames.add("water");
-		illegalNames.add("propstats");
-		illegalNames.add("playerstats");
-		illegalNames.add("all");
 		illegalNames.add("properties");
 		illegalNames.add("players");
 		illegalNames.add("+$");
@@ -58,32 +70,23 @@ public class SetUp {
 		illegalNames.add("-hotel");
 		illegalNames.add("hotel-");
 		illegalNames.add("assignto");
+		illegalNames.add("stats");
 		
-		
-		System.out.print("How many players will be enjoying my company?  I will not allow more than 6 or less than 2.  \n");
+		System.out.print("How many players will be enjoying my company?  I will not allow more than 6 or less than 2. ");
 		int p = input.nextInt();
 		
 		while (p < 2 || p > 6) {
 			if (p < 2) {
-				System.out.println("No lonley bois, try again. ");
+				System.out.print("No lonley bois, try again. ");
 			} else {
-				System.out.println("No crowds, too complicated, try again.  ");
+				System.out.print("No crowds, too complicated, try again.  ");
 			}
 			p = input.nextInt();
 			
 		}
 		
 		for (int i = 1; i <= p; i++) {
-			String name = "";
-			do {
-				if (illegalNames.contains(name)) {
-					System.out.print("That is not allowed.  ");
-				}
-				System.out.print("What is the name of player " + i + "? \n");
-				name = input.next().toLowerCase();
-				
-				
-			} while (illegalNames.contains(name));
+			String name = promptForName(i);
 			illegalNames.add(name);
 			
 			Player newPlayer = new Player(name);

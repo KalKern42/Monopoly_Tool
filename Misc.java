@@ -102,7 +102,7 @@ public class Misc {
 			for (int i = 1; i <= 4; i++) { // per house
 				int priceAtHousesOwned = property.houseRent[i];
 
-				if (property.houses == i) {
+				if (property.houses == i && property.hotel == false) {
 					rents += ANSI_BOLD;
 				}
 				String houses = repeat(HOUSE, i);
