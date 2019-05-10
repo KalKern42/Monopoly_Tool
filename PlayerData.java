@@ -19,10 +19,7 @@ public class PlayerData {
 	}
 	
 	public PlayerData() {
-		Player p1 = new Player("Player1");
-		playerList.add(p1);
-		Player p2 = new Player("Player2");
-		playerList.add(p2);
+		
 	}
 
 }

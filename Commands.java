@@ -15,7 +15,7 @@ class Commands {
 	public static final String ANSI_RESET = "\u001B[0m"; // hope you don't mind a little bit of text formatting
 	public static final String ANSI_BOLD = "\033[1;99m";
 	
-	public static void main(String[] args) {
+	public static void start() {
 		Scanner input = new Scanner(System.in);
 		int stayIn        = 0; //how to exit the loop
 		String usrImpt    = ""; //for basic commands and leaving the loop
