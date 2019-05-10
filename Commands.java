@@ -23,12 +23,13 @@ class Commands {
 		String actCommand = ""; //this is for taking the commands into other methods
 		String[] comHands = new String[5]; //for the more complex commands requiring more than one target (also sorry for the pun)
 		String[] comlist  = {
-			"cmds  \t\t\t\t\tdisplays a list of commands" , 
+			"cmds  \t\t\t\t\tdisplays a list of commands",
+			"rules  \t\t\t\t\tdisplays the rules of monopoly", 
 			"all properties \t\t\t\tdisplays a list of every property in the game",
 			"[color] properties \t\t\tdisplays a list of every property of same color or type",
 			"players \t\t\t\tdisplays a quick overview of each player",
 			"[property] stats\t\t\tdisplays stats specific to a property",
-			"[player] stats\t\t\tdisplays stats specific to a player",
+			"[player] stats\t\t\t\tdisplays stats specific to a player",
 			"[player] +$ [amount]\t\t\tadds money to player's bank account",
 			"[player] -$ [amount]\t\t\tsubtracts money from a player's bank accounts",
 			"[player1] send [player2] [amount] \tsends money from one player to another",
