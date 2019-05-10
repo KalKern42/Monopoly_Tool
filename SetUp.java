@@ -9,7 +9,7 @@ public class SetUp {
 		ArrayList<String> illegalNames = new ArrayList<String>();
 		illegalNames.add("kill");
 		illegalNames.add("help");
-		// add the commands.
+		
 		illegalNames.add("mediterranean");
 		illegalNames.add("baltic");
 		illegalNames.add("oriental");
@@ -36,6 +36,30 @@ public class SetUp {
 		illegalNames.add("short");
 		illegalNames.add("electric");
 		illegalNames.add("water");
+		illegalNames.add("propstats");
+		illegalNames.add("playerstats");
+		illegalNames.add("all");
+		illegalNames.add("properties");
+		illegalNames.add("players");
+		illegalNames.add("+$");
+		illegalNames.add("$+");
+		illegalNames.add("$-");
+		illegalNames.add("-$");
+		illegalNames.add("send");
+		illegalNames.add("rent");
+		illegalNames.add("buy");
+		illegalNames.add("mortgage");
+		illegalNames.add("unmortgage");
+		illegalNames.add("+house");
+		illegalNames.add("house+");
+		illegalNames.add("-house");
+		illegalNames.add("house-");
+		illegalNames.add("+hotel");
+		illegalNames.add("hotel+");
+		illegalNames.add("-hotel");
+		illegalNames.add("hotel-");
+		illegalNames.add("assignto");
+		
 		
 		System.out.print("How many players will be enjoying my company?  I will not allow more than 6 or less than 2.  \n");
 		int p = input.nextInt();
