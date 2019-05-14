@@ -75,8 +75,11 @@ public class Misc {
 		}
 			
 		else if (property.utility) {		// UTILITY
-			int numOwnerUtilities = findAllOfColor("utility", property.owner.properties).size();
-			
+		
+			int numOwnerUtilities = 0;
+			if (property.owner != null) {
+				numOwnerUtilities = findAllOfColor("utility", property.owner.properties).size();
+			}
 			if (numOwnerUtilities == 1) {
 				rents += ANSI_BOLD;
 			}

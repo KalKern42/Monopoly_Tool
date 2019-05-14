@@ -50,7 +50,7 @@ class Commands {
 		
 		
 		System.out.println("Begining Monopoly Commands..... ");
-		System.out.println("(type: \"lmo\" to leave or \"cmds\" to see what you can do)\n");
+		System.out.println("(type: \"exit\" to leave or \"cmds\" to see what you can do)\n");
 				
 		while (stayIn == 0) {
 			System.out.print(ANSI_BOLD + "> " + ANSI_RESET);
