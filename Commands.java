@@ -99,6 +99,16 @@ elif (usrImpt.contains(command name){
 				Data.commands.propertiesByType(comHands[0]);
 			}
 			
+			else if (usrImpt.equals("railroads")) {
+				usrImpt.contains("railroads");
+				Data.commands.propertiesByType("railroad");
+			}
+			
+			else if (usrImpt.equals("utilities")) {
+				usrImpt.contains("utilities");
+				Data.commands.propertiesByType("utility");
+			}
+		
 			else if (usrImpt.equals("players")) { // if previous didn't happen, assume they want a specific color
 				actCommand = "players";
 				Data.commands.playersOverview();

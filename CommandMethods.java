@@ -10,6 +10,7 @@ public class CommandMethods {
 	final String ANSI_UNDERLINE = "\033[4;39m";
 	final String ANSI_LIGHT_GREEN = "\033[1;92m";
 	final String ANSI_LIGHT_RED = "\033[0;91m";
+	final String ANSI_LIGHT_YELLOW = "\033[0;93m";
 	public void propertyStats(String propertyName) {
 		Property property = properties.get(propertyName);
 		
@@ -69,9 +70,32 @@ public class CommandMethods {
 	public void playerStats(Player player) {
 		String title = ANSI_BOLD + player.toString().toUpperCase() + ANSI_RESET;
 		
+		String cash = ANSI_LIGHT_GREEN + "$";
+		if (player.cash < 0) {
+			cash = ANSI_LIGHT_RED + "-$" + (int)Math.abs(player.cash) + ANSI_RESET;
+		}
+		else if (player.cash > 0) {
+			cash += player.cash + ANSI_RESET;
+		}
+		else {
+			cash = ANSI_LIGHT_YELLOW + "$0" + ANSI_RESET;
+		}
+		
+		String worth = ANSI_LIGHT_GREEN + "$";
+		int w = player.worth();
+		if (w < 0) {
+			worth = ANSI_LIGHT_RED + "-$" + (int)Math.abs(w) + ANSI_RESET;
+		}
+		else if (w > 0) {
+			worth += w + ANSI_RESET;
+		}
+		else {
+			worth = ANSI_LIGHT_YELLOW + "$0" + ANSI_RESET;
+		}
+		
 		String printOut = title	 			  					+  "\n\t"
-						+ "balance\t\t : $" + player.cash		+ "\n\t"
-						+ "net worth\t : $" + player.worth()	+ "\n\t"
+						+ "balance\t\t : " + cash				+ "\n\t"
+						+ "net worth\t : " + worth				+ "\n\t"
 						+ "properties (" + player.properties.size() + ")\n"
 						+ Misc.createPropertyList(player.properties, "\t  ") + "\n";
 						
@@ -105,9 +129,33 @@ public class CommandMethods {
 		String printOut = title + "\n";
 		
 		for (Player player : Data.players.playerList) {
+			
+			String cash = ANSI_LIGHT_GREEN + "$";
+			if (player.cash < 0) {
+				cash = ANSI_LIGHT_RED + "-$" + (int)Math.abs(player.cash) + ANSI_RESET;
+			}
+			else if (player.cash > 0) {
+				cash += player.cash + ANSI_RESET;
+			}
+			else {
+				cash = ANSI_LIGHT_YELLOW + "$0" + ANSI_RESET;
+			}
+			
+			String worth = ANSI_LIGHT_GREEN + "$" ;
+			int w = player.worth();
+			if (w < 0) {
+				worth = ANSI_LIGHT_RED + "-$" + (int)Math.abs(w) + ANSI_RESET;
+			}
+			else if (w > 0) {
+				worth += w + ANSI_RESET;
+			}
+			else {
+				worth = ANSI_LIGHT_YELLOW + "$0" + ANSI_RESET;
+			}
+			
 			printOut += "   " + ANSI_UNDERLINE + player + ANSI_RESET;
-			printOut += "\n\tbalance\t\t: $" + player.cash;
-			printOut += "\n\tnet worth\t: $" + player.worth();
+			printOut += "\n\tbalance\t\t: " + cash;
+			printOut += "\n\tnet worth\t: " + worth;
 			printOut += "\n\tproperties (" + player.properties.size() + ")\n";
 			int railroads = 0;
 			int utilities = 0;
