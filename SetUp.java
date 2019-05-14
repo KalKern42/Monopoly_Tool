@@ -70,7 +70,7 @@ public class SetUp {
 		illegalNames.add("-hotel");
 		illegalNames.add("hotel-");
 		illegalNames.add("assignto");
-		illegalNames.add("stats");
+		illegalNames.add("info");
 		
 		System.out.print("How many players will be enjoying my company?  I will not allow more than 6 or less than 2. ");
 		int p = input.nextInt();

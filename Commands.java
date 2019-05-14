@@ -25,22 +25,27 @@ class Commands {
 		String[] comlist  = {
 			"cmds  \t\t\t\t\tdisplays a list of commands",
 			"rules  \t\t\t\t\tdisplays the rules of monopoly", 
-			"all properties \t\t\t\tdisplays a list of every property in the game",
-			"[color] properties \t\t\tdisplays a list of every property of same color or type",
+			"exit \t\t\t\t\texit the game.",
+			"",
 			"players \t\t\t\tdisplays a quick overview of each player",
-			"[property] stats\t\t\tdisplays stats specific to a property",
-			"[player] stats\t\t\t\tdisplays stats specific to a player",
+			"[player] info\t\t\t\tdisplays stats specific to a player",
 			"[player] +$ [amount]\t\t\tadds money to player's bank account",
 			"[player] -$ [amount]\t\t\tsubtracts money from a player's bank accounts",
-			"[player1] send [player2] [amount] \tsends money from one player to another",
+			"[player] send [player2] [amount] \tsends money from one player to another",
 			"[player] rent [property]\t\tprompts the player to pay the rent fee for a property",
 			"[player] buy [property]\t\t\tprompts the player to buy a property",
-			"mortgage [property]\t\t\tprompts the player to mortgage one of their properties",
-			"unmortgage [property]\t\t\tprompts the player to unmortgage one of their properties",
+			"",
+			"all properties \t\t\t\tdisplays a list of every property in the game",
+			"[color] properties \t\t\tdisplays a list of every property of same color or type",
+			"[property] info \t\t\tdisplays stats specific to a property",
 			"[property] +houses [amount]\t\tprompts the player to buy houses for a property",
 			"[property] -houses [amount]\t\tprompts the player to sell houses from a property",
-			"[property] +hotel [amount]\t\tprompts the player to buy a hotel for a property",
-			"[property] -houses [amount]\t\tprompts the player to sell a property's hotel",
+			"[property] +hotel \t\t\tprompts the player to buy a hotel for a property",
+			"[property] -hotel \t\t\tprompts the player to sell a property's hotel",
+			"[property] assignto \t\t\treassigns the property's owner, free of charge",
+			"mortgage [property]\t\t\tprompts the player to mortgage one of their properties",
+			"unmortgage [property]\t\t\tprompts the player to unmortgage one of their properties",
+			
 		};
 		
 		
@@ -60,7 +65,7 @@ Adding a new comand looks like:
 elif (usrImpt.contains(command name){
 	everything the command does
 }   ~~Reffer to kill as a refference also~~*/
-			if (usrImpt.contains("lmo")) {
+			if (usrImpt.contains("exit")) {
 				stayIn = 1;
 			}else if (usrImpt.contains("clear")) {
 				for (int i = 0; i < 30; i++) {
@@ -77,9 +82,9 @@ elif (usrImpt.contains(command name){
 					System.out.println("\t" + comlist[r]);
 				}
 				System.out.println("");
-			}else if (usrImpt.contains(" stats")) {
-				actCommand = "stats";
-				comHands = commandPlex(comHands, "stats");
+			}else if (usrImpt.contains(" info")) {
+				actCommand = "info";
+				comHands = commandPlex(comHands, "info");
 				Data.commands.stats(comHands[0]);	
 			}
 						
