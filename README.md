@@ -31,6 +31,6 @@ for (int c = 0; c < commBit.length; c++){
 ```
 
 ## The AMAZING people who made this possible
-David Cosby
-Justin Garnica
-Kal Kern
+David Cosby,
+Justin Garnica,
+Kal Kern,
